@@ -3,509 +3,814 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Afonso Lobo Palmeira · Digital CV</title>
-  <meta name="description" content="Digital CV of Afonso Lobo Palmeira">
-  <link rel="icon" href="bobalogic.github.io/Profile photograph.png" type="image/svg+xml">
+  <title>Afonso Lobo Palmeira · Tech Entrepreneur & Software Engineer</title>
+  <meta name="description" content="Tech Entrepreneur & Software Engineer - Building the future through innovative technology solutions">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/lucide@latest/dist/umd/lucide.js" rel="stylesheet">
 </head>
 <body>
-  <main class="container">
-    <!-- Animated background -->
-    <div class="animated-bg">
-      <div class="bg-circle bg-circle-1"></div>
-      <div class="bg-circle bg-circle-2"></div>
-      <div class="bg-circle bg-circle-3"></div>
+  <!-- Animated Background -->
+  <div class="animated-bg">
+    <div class="bg-gradient bg-gradient-1"></div>
+    <div class="bg-gradient bg-gradient-2"></div>
+    <div class="bg-gradient bg-gradient-3"></div>
+    <div class="floating-elements">
+      <div class="float-icon float-1"><i class="fas fa-code"></i></div>
+      <div class="float-icon float-2"><i class="fas fa-rocket"></i></div>
+      <div class="float-icon float-3"><i class="fas fa-lightbulb"></i></div>
+      <div class="float-icon float-4"><i class="fas fa-brain"></i></div>
+      <div class="float-icon float-5"><i class="fas fa-network-wired"></i></div>
     </div>
+  </div>
 
-    <header class="header">
-      <div class="title">
-        <div class="profile-section">
-          <div class="profile-image">
-            <div class="profile-placeholder">
-              <i class="fas fa-user"></i>
-            </div>
-          </div>
-          <div class="profile-info">
-            <h1>Afonso Lobo Palmeira</h1>
-            <p class="subtitle">Software Engineer · Networking Security · Lisbon, Portugal</p>
-            <div class="status-indicator">
-              <span class="status-dot"></span>
-              Available for opportunities
-            </div>
-          </div>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <div class="brand-icon">
+          <i class="fas fa-terminal"></i>
         </div>
-        <div class="badges">
-          <span class="badge education-badge">
-            <i class="fas fa-graduation-cap"></i>
-            Computer Science Engineering ('24) @ IST
-          </span>
-          <a class="badge contact-badge" href="mailto:afonsopalmeira2@gmail.com">
-            <i class="fas fa-envelope"></i>
-            afonsopalmeira2@gmail.com
-          </a>
-          <span class="badge contact-badge">
-            <i class="fas fa-phone"></i>
-            +351 963 890 065
-          </span>
-          <a class="badge social-badge" href="https://www.linkedin.com/in/afonsolobopalmeira" target="_blank" rel="noreferrer">
-            <i class="fab fa-linkedin"></i>
-            LinkedIn
-          </a>
-          <a class="badge social-badge" href="https://github.com/Bobalogic" target="_blank" rel="noreferrer">
-            <i class="fab fa-github"></i>
-            GitHub
-          </a>
-          <a class="badge social-badge" href="https://bobalogic.github.io/CV" target="_blank" rel="noreferrer">
-            <i class="fas fa-globe"></i>
-            Portfolio
-          </a>
-        </div>
+        <span class="brand-text">Afonso Palmeira</span>
       </div>
-      <div class="header-actions">
-        <a class="btn btn-primary" href="#contact">
-          <i class="fas fa-envelope"></i>
-          Contact Me
-        </a>
-        <a class="btn btn-secondary" href="file:///c:/Users/apalmeir/OneDrive%20-%20Cisco/Desktop/AfonsoLoboPalmeira_Resume___june25.pdf" target="_blank">
+      <div class="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#" class="nav-cta">
           <i class="fas fa-download"></i>
           Download CV
         </a>
-        <a class="btn btn-outline print-btn" href="javascript:window.print()">
-          <i class="fas fa-print"></i>
-          Print PDF
-        </a>
       </div>
-    </header>
+      <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
 
-    <section class="grid">
-      <section class="card about-card">
-        <div class="card-header">
-          <h2><i class="fas fa-user-circle"></i> About</h2>
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-sparkles"></i>
+          <span>Available for opportunities</span>
         </div>
-        <p>Software Engineer with expertise in networking security and full-stack development. Currently at Cisco specializing in identity & access management and ISE troubleshooting. Previously contributed to major streaming platforms (Peacock, Showmax) and developed trading platforms. Experienced with Python, TypeScript/JavaScript, Java, SQL, and modern frameworks.</p>
-        <div class="key-highlights">
-          <div class="highlight-item">
-            <i class="fas fa-shield-alt"></i>
-            <span>Security Expert</span>
+        <h1 class="hero-title">
+          Building the future through
+          <span class="gradient-text">innovative technology</span>
+        </h1>
+        <p class="hero-subtitle">
+          Tech Entrepreneur & Software Engineer specializing in security, full-stack development, 
+          and bringing bold ideas to life. Currently at Cisco, previously at Sky, with successful ventures like Trinca e Molha.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number">101.5%</div>
+            <div class="stat-label">ROI in 17 days</div>
           </div>
-          <div class="highlight-item">
-            <i class="fas fa-code"></i>
-            <span>Full-Stack Developer</span>
+          <div class="stat">
+            <div class="stat-number">4K+</div>
+            <div class="stat-label">Burgers served</div>
           </div>
-          <div class="highlight-item">
-            <i class="fas fa-network-wired"></i>
-            <span>Network Specialist</span>
+          <div class="stat">
+            <div class="stat-number">30M+</div>
+            <div class="stat-label">Users reached</div>
           </div>
-          <div class="highlight-item">
+        </div>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary btn-lg">
             <i class="fas fa-rocket"></i>
-            <span>Entrepreneur</span>
-          </div>
-        </div>
-      </section>
-      <aside class="card skills">
-        <div class="card-header">
-          <h2><i class="fas fa-tools"></i> Skills</h2>
-        </div>
-        <div class="skills-grid">
-          <div class="skill-category">
-            <h3><i class="fas fa-laptop-code"></i> Programming</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">Java</span>
-              <span class="skill-tag">TypeScript</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">SQL</span>
-              <span class="skill-tag">C/C++</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3><i class="fas fa-cogs"></i> Frameworks & Tools</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">React</span>
-              <span class="skill-tag">Vue.js</span>
-              <span class="skill-tag">Spring Boot</span>
-              <span class="skill-tag">Flask</span>
-              <span class="skill-tag">Firebase</span>
-              <span class="skill-tag">Git</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3><i class="fas fa-shield-alt"></i> Networking & Security</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">CCNA</span>
-              <span class="skill-tag">Cisco ISE</span>
-              <span class="skill-tag">IAM</span>
-              <span class="skill-tag">NAC</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3><i class="fas fa-globe"></i> Languages</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">English (Fluent)</span>
-              <span class="skill-tag">Portuguese (Native)</span>
-            </div>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <section class="card experience-card">
-      <div class="card-header">
-        <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
-      </div>
-      
-      <div class="experience-sections">
-        <!-- Technical Experience -->
-        <div class="experience-section">
-          <h3><i class="fas fa-laptop-code"></i> Technical Experience</h3>
-          <div class="experience-timeline">
-            <div class="experience-item">
-              <div class="experience-dot"></div>
-              <div class="experience-content">
-                <h3>Security Technical Consulting Engineer (TAC AAA)</h3>
-                <div class="company">Cisco Systems</div>
-                <div class="meta">
-                  <span><i class="fas fa-map-marker-alt"></i> Lisbon, Portugal</span>
-                  <span><i class="fas fa-calendar-alt"></i> Sept 2024 – Present</span>
-                </div>
-                <ul>
-                  <li>Troubleshoot complex identity/access/policy incidents</li>
-                  <li>Advanced support in Cisco Identity Services Engine (ISE)</li>
-                  <li>Cross‑functional collaboration on security configurations</li>
-                </ul>
-                <div class="tech-badges">
-                  <span class="tech-badge cisco">Cisco ISE</span>
-                  <span class="tech-badge">Network Security</span>
-                  <span class="tech-badge">RADIUS</span>
-                  <span class="tech-badge">TACACS+</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="experience-item">
-              <div class="experience-dot"></div>
-              <div class="experience-content">
-                <h3>Apprentice Frontend Developer</h3>
-                <div class="company">Sky</div>
-                <div class="meta">
-                  <span><i class="fas fa-map-marker-alt"></i> Lisbon, Portugal</span>
-                  <span><i class="fas fa-calendar-alt"></i> Jul 2024 – Aug 2024</span>
-                </div>
-                <ul>
-                  <li>Built upsell features for Peacock (+30M users) and Showmax</li>
-                  <li>Agile workflow with stand‑ups, planning, code reviews</li>
-                  <li>Responsive UI and performance improvements</li>
-                </ul>
-                <div class="tech-badges">
-                  <span class="tech-badge typescript">TypeScript</span>
-                  <span class="tech-badge javascript">JavaScript</span>
-                  <span class="tech-badge react">React</span>
-                  <span class="tech-badge">CSS</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="experience-item">
-              <div class="experience-dot"></div>
-              <div class="experience-content">
-                <h3>Software Engineering Intern</h3>
-                <div class="company">Critical Software</div>
-                <div class="meta">
-                  <span><i class="fas fa-map-marker-alt"></i> Lisbon, Portugal</span>
-                  <span><i class="fas fa-calendar-alt"></i> Jul 2023 – Aug 2023</span>
-                </div>
-                <ul>
-                  <li>Developed beta crypto trading platform</li>
-                  <li>IoT infrastructure management tool</li>
-                  <li>Code documentation and aerospace projects</li>
-                </ul>
-                <div class="tech-badges">
-                  <span class="tech-badge python">Python</span>
-                  <span class="tech-badge django">Django</span>
-                  <span class="tech-badge">Firebase</span>
-                  <span class="tech-badge">REST APIs</span>
-                  <span class="tech-badge">SQL</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Entrepreneurial Experience -->
-        <div class="experience-section">
-          <h3><i class="fas fa-rocket"></i> Entrepreneurial Experience</h3>
-          <div class="experience-timeline">
-            <div class="experience-item">
-              <div class="experience-dot"></div>
-              <div class="experience-content">
-                <h3>Co‑Founder & Business Owner</h3>
-                <div class="company">Trinca e Molha</div>
-                <div class="meta">
-                  <span><i class="fas fa-map-marker-alt"></i> Lisbon, Portugal</span>
-                  <span><i class="fas fa-calendar-alt"></i> Summer 2024</span>
-                </div>
-                <ul>
-                  <li>101.5% ROI in 17 days; 4,000+ burgers served</li>
-                  <li>300K+ Instagram reach and social media presence</li>
-                  <li>Supplier negotiation, operations, and branding</li>
-                  <li>Featured in NIT magazine; Mayor of Oeiras visit</li>
-                </ul>
-                <div class="experience-links">
-                  <a href="https://www.instagram.com/trincaemolha/" target="_blank" class="experience-link instagram">
-                    <i class="fab fa-instagram"></i> Instagram
-                  </a>
-                  <a href="#" target="_blank" class="experience-link news">
-                    <i class="fas fa-newspaper"></i> NIT Article
-                  </a>
-                </div>
-                <div class="tech-badges">
-                  <span class="tech-badge">Business Development</span>
-                  <span class="tech-badge">Marketing</span>
-                  <span class="tech-badge">Operations</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="experience-item">
-              <div class="experience-dot"></div>
-              <div class="experience-content">
-                <h3>Co‑Founder & Developer</h3>
-                <div class="company">Fixity</div>
-                <div class="meta">
-                  <span><i class="fas fa-calendar-alt"></i> Side Project - Ongoing</span>
-                </div>
-                <ul>
-                  <li>Exploring solutions for digital trust and transparency</li>
-                  <li>Full-stack development and product strategy</li>
-                  <li>Building innovative blockchain-based solutions</li>
-                </ul>
-                <div class="experience-links">
-                  <a href="https://buildtrust-landing-page-95.pages.dev/" target="_blank" class="experience-link">
-                    <i class="fas fa-globe"></i> Website
-                  </a>
-                </div>
-                <div class="tech-badges">
-                  <span class="tech-badge">Web Development</span>
-                  <span class="tech-badge">Product Strategy</span>
-                  <span class="tech-badge">Blockchain</span>
-                </div>
-              </div>
-            </div>
-          </div>
+            Let's Collaborate
+          </a>
+          <a href="#projects" class="btn btn-secondary btn-lg">
+            <i class="fas fa-eye"></i>
+            View My Work
+          </a>
         </div>
       </div>
-      
-      <!-- Other Relevant Experience -->
-      <div class="other-experiences">
-        <h4><i class="fas fa-plus-circle"></i> Other Relevant Experience</h4>
-        <div class="other-experience-list">
-          <div class="other-experience-item">
-            <span class="role">Student Union Representative</span>
-            <span class="period">2022-2023</span>
+      <div class="hero-visual">
+        <div class="tech-stack-visual">
+          <div class="stack-item stack-python">
+            <i class="fab fa-python"></i>
+            <span>Python</span>
           </div>
-          <div class="other-experience-item">
-            <span class="role">Mathematics Tutor - IST Tutoring Center</span>
-            <span class="period">2022-2024</span>
+          <div class="stack-item stack-js">
+            <i class="fab fa-js-square"></i>
+            <span>JavaScript</span>
           </div>
-          <div class="other-experience-item">
-            <span class="role">Private Mathematics & Physics Tutor</span>
-            <span class="period">2021-2024</span>
+          <div class="stack-item stack-react">
+            <i class="fab fa-react"></i>
+            <span>React</span>
+          </div>
+          <div class="stack-item stack-cisco">
+            <i class="fas fa-shield-alt"></i>
+            <span>Cisco</span>
+          </div>
+          <div class="stack-item stack-entrepreneur">
+            <i class="fas fa-chart-line"></i>
+            <span>Business</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="grid">
-      <section class="card projects-card">
-        <div class="card-header">
-          <h2><i class="fas fa-rocket"></i> Projects</h2>
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-user-astronaut"></i>
+          About Me
+        </h2>
+        <p class="section-subtitle">Bridging technology and entrepreneurship</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-content">
+          <div class="about-text">
+            <p class="lead">
+              I'm a <strong>Software Engineer</strong> with a passion for building innovative solutions that make a real impact. 
+              Currently working at <strong>Cisco</strong> in network security and identity management, I combine technical expertise 
+              with entrepreneurial drive.
+            </p>
+            <p>
+              My journey spans from developing features for <strong>30M+ users</strong> at Sky's streaming platforms 
+              to co-founding <strong>Trinca e Molha</strong>, achieving 101.5% ROI in just 17 days. 
+              I believe in the power of technology to transform ideas into reality.
+            </p>
+          </div>
+
+          <div class="expertise-cards">
+            <div class="expertise-card">
+              <div class="expertise-icon">
+                <i class="fas fa-shield-halved"></i>
+              </div>
+              <h3>Security Expert</h3>
+              <p>Specialized in network security, identity management, and Cisco ISE solutions</p>
+            </div>
+            <div class="expertise-card">
+              <div class="expertise-icon">
+                <i class="fas fa-code-branch"></i>
+              </div>
+              <h3>Full-Stack Developer</h3>
+              <p>Proficient in Python, TypeScript, React, and modern development frameworks</p>
+            </div>
+            <div class="expertise-card">
+              <div class="expertise-icon">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <h3>Tech Entrepreneur</h3>
+              <p>Co-founder with proven track record of building successful ventures from ground up</p>
+            </div>
+          </div>
         </div>
-        <div class="projects-grid">
-          <div class="project-item">
-            <div class="project-icon">
+
+        <div class="skills-showcase">
+          <div class="skill-category">
+            <h3><i class="fas fa-terminal"></i> Programming Languages</h3>
+            <div class="skill-grid">
+              <div class="skill-item skill-python">
+                <i class="fab fa-python"></i>
+                <span>Python</span>
+                <div class="skill-level">95%</div>
+              </div>
+              <div class="skill-item skill-js">
+                <i class="fab fa-js-square"></i>
+                <span>TypeScript</span>
+                <div class="skill-level">90%</div>
+              </div>
+              <div class="skill-item skill-java">
+                <i class="fab fa-java"></i>
+                <span>Java</span>
+                <div class="skill-level">85%</div>
+              </div>
+              <div class="skill-item skill-sql">
+                <i class="fas fa-database"></i>
+                <span>SQL</span>
+                <div class="skill-level">88%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3><i class="fas fa-tools"></i> Technologies & Frameworks</h3>
+            <div class="tech-tags">
+              <span class="tech-tag react">React</span>
+              <span class="tech-tag vue">Vue.js</span>
+              <span class="tech-tag spring">Spring Boot</span>
+              <span class="tech-tag flask">Flask</span>
+              <span class="tech-tag firebase">Firebase</span>
+              <span class="tech-tag cisco">Cisco ISE</span>
+              <span class="tech-tag docker">Docker</span>
+              <span class="tech-tag git">Git</span>
+            </div>
+          </div>
+
+          <div class="certifications">
+            <h3><i class="fas fa-certificate"></i> Certifications & Recognition</h3>
+            <div class="cert-list">
+              <div class="cert-item">
+                <i class="fas fa-award"></i>
+                <span>Cisco CCNA (2024-2027)</span>
+              </div>
+              <div class="cert-item">
+                <i class="fas fa-newspaper"></i>
+                <span>Featured in NIT Magazine</span>
+              </div>
+              <div class="cert-item">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Computer Science Engineering @ IST</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-briefcase"></i>
+          Experience Journey
+        </h2>
+        <p class="section-subtitle">From corporate innovation to entrepreneurial ventures</p>
+      </div>
+
+      <div class="experience-container">
+        <!-- Professional Track -->
+        <div class="experience-track">
+          <div class="track-header">
+            <i class="fas fa-building"></i>
+            <h3>Professional Experience</h3>
+          </div>
+          
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-marker cisco"></div>
+              <div class="timeline-content">
+                <div class="experience-card">
+                  <div class="card-header">
+                    <div class="company-logo cisco-logo">
+                      <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="card-title">
+                      <h3>Security Technical Consulting Engineer</h3>
+                      <div class="company">Cisco Systems</div>
+                      <div class="period">Sept 2024 – Present</div>
+                    </div>
+                    <div class="status-badge current">Current</div>
+                  </div>
+                  <p>Advanced troubleshooting of identity/access/policy incidents and expert support for Cisco Identity Services Engine (ISE).</p>
+                  <ul class="achievements">
+                    <li><i class="fas fa-check"></i> Specialized in complex network security configurations</li>
+                    <li><i class="fas fa-check"></i> Cross-functional collaboration on enterprise security</li>
+                    <li><i class="fas fa-check"></i> Expert-level ISE troubleshooting and optimization</li>
+                  </ul>
+                  <div class="tech-stack">
+                    <span class="tech-badge cisco">Cisco ISE</span>
+                    <span class="tech-badge">RADIUS</span>
+                    <span class="tech-badge">TACACS+</span>
+                    <span class="tech-badge">Network Security</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker sky"></div>
+              <div class="timeline-content">
+                <div class="experience-card">
+                  <div class="card-header">
+                    <div class="company-logo sky-logo">
+                      <i class="fas fa-satellite-dish"></i>
+                    </div>
+                    <div class="card-title">
+                      <h3>Apprentice Frontend Developer</h3>
+                      <div class="company">Sky</div>
+                      <div class="period">Jul 2024 – Aug 2024</div>
+                    </div>
+                  </div>
+                  <p>Built upsell features for major streaming platforms serving 30M+ users including Peacock and Showmax.</p>
+                  <ul class="achievements">
+                    <li><i class="fas fa-check"></i> Developed features reaching 30M+ users</li>
+                    <li><i class="fas fa-check"></i> Implemented responsive UI improvements</li>
+                    <li><i class="fas fa-check"></i> Agile development with code reviews</li>
+                  </ul>
+                  <div class="tech-stack">
+                    <span class="tech-badge typescript">TypeScript</span>
+                    <span class="tech-badge react">React</span>
+                    <span class="tech-badge">CSS</span>
+                    <span class="tech-badge">Agile</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker critical"></div>
+              <div class="timeline-content">
+                <div class="experience-card">
+                  <div class="card-header">
+                    <div class="company-logo critical-logo">
+                      <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="card-title">
+                      <h3>Software Engineering Intern</h3>
+                      <div class="company">Critical Software</div>
+                      <div class="period">Jul 2023 – Aug 2023</div>
+                    </div>
+                  </div>
+                  <p>Developed innovative solutions including a crypto trading platform and IoT infrastructure management tools.</p>
+                  <ul class="achievements">
+                    <li><i class="fas fa-check"></i> Built beta crypto trading platform</li>
+                    <li><i class="fas fa-check"></i> IoT infrastructure management system</li>
+                    <li><i class="fas fa-check"></i> Aerospace project documentation</li>
+                  </ul>
+                  <div class="tech-stack">
+                    <span class="tech-badge python">Python</span>
+                    <span class="tech-badge django">Django</span>
+                    <span class="tech-badge">Firebase</span>
+                    <span class="tech-badge">REST APIs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entrepreneurial Track -->
+        <div class="experience-track">
+          <div class="track-header">
+            <i class="fas fa-lightbulb"></i>
+            <h3>Entrepreneurial Ventures</h3>
+          </div>
+          
+          <div class="timeline">
+            <div class="timeline-item featured">
+              <div class="timeline-marker entrepreneur"></div>
+              <div class="timeline-content">
+                <div class="experience-card featured-card">
+                  <div class="card-header">
+                    <div class="company-logo burger-logo">
+                      <i class="fas fa-hamburger"></i>
+                    </div>
+                    <div class="card-title">
+                      <h3>Co-Founder & Business Owner</h3>
+                      <div class="company">Trinca e Molha</div>
+                      <div class="period">Summer 2024</div>
+                    </div>
+                    <div class="status-badge success">101.5% ROI</div>
+                  </div>
+                  <p>Built and scaled a successful food business achieving exceptional returns and massive social media reach.</p>
+                  <div class="metrics-grid">
+                    <div class="metric">
+                      <div class="metric-value">101.5%</div>
+                      <div class="metric-label">ROI in 17 days</div>
+                    </div>
+                    <div class="metric">
+                      <div class="metric-value">4K+</div>
+                      <div class="metric-label">Burgers served</div>
+                    </div>
+                    <div class="metric">
+                      <div class="metric-value">300K+</div>
+                      <div class="metric-label">Instagram reach</div>
+                    </div>
+                  </div>
+                  <ul class="achievements">
+                    <li><i class="fas fa-trophy"></i> Featured in NIT magazine</li>
+                    <li><i class="fas fa-handshake"></i> Mayor of Oeiras visit</li>
+                    <li><i class="fas fa-chart-line"></i> Viral social media presence</li>
+                  </ul>
+                  <div class="venture-links">
+                    <a href="https://www.instagram.com/trincaemolha/" target="_blank" class="venture-link instagram">
+                      <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="#" target="_blank" class="venture-link press">
+                      <i class="fas fa-newspaper"></i> Press Coverage
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker fixity"></div>
+              <div class="timeline-content">
+                <div class="experience-card">
+                  <div class="card-header">
+                    <div class="company-logo fixity-logo">
+                      <i class="fas fa-shield-check"></i>
+                    </div>
+                    <div class="card-title">
+                      <h3>Co-Founder & Developer</h3>
+                      <div class="company">Fixity</div>
+                      <div class="period">Ongoing Side Project</div>
+                    </div>
+                    <div class="status-badge ongoing">In Development</div>
+                  </div>
+                  <p>Pioneering solutions for digital trust and transparency through innovative blockchain-based technologies.</p>
+                  <ul class="achievements">
+                    <li><i class="fas fa-check"></i> Full-stack development and architecture</li>
+                    <li><i class="fas fa-check"></i> Product strategy and user research</li>
+                    <li><i class="fas fa-check"></i> Blockchain integration and smart contracts</li>
+                  </ul>
+                  <div class="tech-stack">
+                    <span class="tech-badge">Web3</span>
+                    <span class="tech-badge">Blockchain</span>
+                    <span class="tech-badge">Full-Stack</span>
+                    <span class="tech-badge">Product Strategy</span>
+                  </div>
+                  <a href="https://buildtrust-landing-page-95.pages.dev/" target="_blank" class="venture-link">
+                    <i class="fas fa-external-link-alt"></i> View Project
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-rocket"></i>
+          Featured Projects
+        </h2>
+        <p class="section-subtitle">Innovation meets execution</p>
+      </div>
+
+      <div class="projects-showcase">
+        <div class="project-card featured-project">
+          <div class="project-visual">
+            <div class="project-icon-large">
               <i class="fas fa-shield-check"></i>
             </div>
-            <h3><a href="https://buildtrust-landing-page-95.pages.dev/" target="_blank" rel="noreferrer">Fixity</a></h3>
-            <div class="project-role">Co‑Founder & Developer (side project)</div>
-            <p>Exploring solutions for digital trust and transparency.</p>
+            <div class="project-glow"></div>
           </div>
-          <div class="project-item">
-            <div class="project-icon">
-              <i class="fas fa-chart-line"></i>
+          <div class="project-content">
+            <div class="project-header">
+              <h3>Fixity</h3>
+              <div class="project-status">In Development</div>
             </div>
-            <h3>Técnico Investment Club</h3>
-            <div class="project-role">Asset Manager</div>
-            <p>Managed virtual portfolio and financial analysis.</p>
-          </div>
-          <div class="project-item">
-            <div class="project-icon">
-              <i class="fab fa-python"></i>
+            <p class="project-description">
+              Revolutionary platform exploring digital trust and transparency through blockchain technology. 
+              Building the future of secure digital interactions.
+            </p>
+            <div class="project-features">
+              <div class="feature"><i class="fas fa-check"></i> Blockchain Integration</div>
+              <div class="feature"><i class="fas fa-check"></i> Full-Stack Architecture</div>
+              <div class="feature"><i class="fas fa-check"></i> Modern UI/UX</div>
             </div>
-            <h3>Gorilla Project</h3>
-            <div class="project-role">Developer</div>
-            <p>Python software for Explicandum; boosted traffic 100%+.</p>
-          </div>
-          <div class="project-item">
-            <div class="project-icon">
-              <i class="fas fa-leaf"></i>
+            <div class="project-tech">
+              <span class="tech-tag">Web3</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Blockchain</span>
             </div>
-            <h3>Carbon Tree Project</h3>
-            <div class="project-role">Contributor</div>
-            <p>IoT air quality analysis with ITQB‑Nova & Oeiras Valley.</p>
+            <div class="project-actions">
+              <a href="https://buildtrust-landing-page-95.pages.dev/" target="_blank" class="btn btn-primary">
+                <i class="fas fa-external-link-alt"></i>
+                Live Demo
+              </a>
+              <a href="#" class="btn btn-secondary">
+                <i class="fab fa-github"></i>
+                Source Code
+              </a>
+            </div>
           </div>
         </div>
-      </section>
-      <aside class="card education-card">
-        <div class="card-header">
-          <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-visual mini">
+              <div class="project-icon">
+                <i class="fas fa-hamburger"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Trinca e Molha</h3>
+              <div class="project-role">Co-Founder & Business Owner</div>
+              <p>Successful food business venture achieving 101.5% ROI in 17 days with viral social media presence.</p>
+              <div class="project-metrics">
+                <span class="metric">101.5% ROI</span>
+                <span class="metric">4K+ Served</span>
+                <span class="metric">300K+ Reach</span>
+              </div>
+              <a href="https://www.instagram.com/trincaemolha/" target="_blank" class="project-link">
+                <i class="fab fa-instagram"></i> View Instagram
+              </a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-visual mini">
+              <div class="project-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Técnico Investment Club</h3>
+              <div class="project-role">Asset Manager</div>
+              <p>Managed virtual portfolio and conducted comprehensive financial analysis for student investment club.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Financial Analysis</span>
+                <span class="tech-tag">Portfolio Management</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-visual mini">
+              <div class="project-icon">
+                <i class="fab fa-python"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Gorilla Project</h3>
+              <div class="project-role">Developer</div>
+              <p>Python software solution for Explicandum that significantly boosted website traffic by over 100%.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Web Scraping</span>
+                <span class="tech-tag">Automation</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-visual mini">
+              <div class="project-icon">
+                <i class="fas fa-leaf"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Carbon Tree Project</h3>
+              <div class="project-role">IoT Contributor</div>
+              <p>Environmental monitoring solution using IoT sensors for air quality analysis in collaboration with ITQB-Nova.</p>
+              <div class="project-tech">
+                <span class="tech-tag">IoT</span>
+                <span class="tech-tag">Data Analysis</span>
+                <span class="tech-tag">Environmental Tech</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-visual mini">
+              <div class="project-icon">
+                <i class="fas fa-home"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Immowise</h3>
+              <div class="project-role">Full-Stack Developer</div>
+              <p>Real estate analysis platform with advanced data processing and visualization capabilities.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Data Processing</span>
+                <span class="tech-tag">Web Scraping</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-visual mini">
+              <div class="project-icon">
+                <i class="fas fa-users"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>PTOMatch</h3>
+              <div class="project-role">Developer</div>
+              <p>Social platform connecting people with shared interests and activities in Portugal.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Social Platform</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="education-list">
+      </div>
+
+      <!-- Education & Achievements -->
+      <div class="education-achievements">
+        <div class="education-card">
+          <div class="card-header">
+            <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+          </div>
           <div class="education-item">
-            <div class="education-icon">
-              <i class="fas fa-university"></i>
-            </div>
-            <div class="education-content">
-              <h3>IST – University of Lisbon</h3>
-              <div class="degree">Computer Science Engineering</div>
-              <div class="period">2021 – 2024</div>
-              <div class="status graduated">Graduated ('24)</div>
-            </div>
+            <div class="institution">IST – University of Lisbon</div>
+            <div class="degree">Computer Science Engineering</div>
+            <div class="period">2021 – 2024</div>
+            <div class="status graduated">Graduated</div>
           </div>
           <div class="education-item">
-            <div class="education-icon">
-              <i class="fas fa-building"></i>
+            <div class="institution">NOVA SBE</div>
+            <div class="degree">Management</div>
+            <div class="period">2022 – 2025</div>
+            <div class="status frozen">Enrollment frozen</div>
+          </div>
+        </div>
+
+        <div class="achievements-card">
+          <div class="card-header">
+            <h3><i class="fas fa-trophy"></i> Achievements</h3>
+          </div>
+          <div class="achievement-list">
+            <div class="achievement">
+              <i class="fas fa-certificate"></i>
+              <span>Cisco CCNA Certification (2024-2027)</span>
             </div>
-            <div class="education-content">
-              <h3>NOVA SBE</h3>
-              <div class="degree">Management</div>
-              <div class="period">2022 – 2025</div>
-              <div class="status frozen">Enrollment currently frozen</div>
+            <div class="achievement">
+              <i class="fas fa-newspaper"></i>
+              <span>Featured in NIT Magazine</span>
+            </div>
+            <div class="achievement">
+              <i class="fas fa-medal"></i>
+              <span>Team Captain - Football</span>
+            </div>
+            <div class="achievement">
+              <i class="fas fa-users"></i>
+              <span>Student Union Representative</span>
             </div>
           </div>
         </div>
-        
-        <div class="card-header" style="margin-top: 24px;">
-          <h2><i class="fas fa-trophy"></i> Achievements</h2>
-        </div>
-        <div class="achievements-list">
-          <div class="achievement-item">
-            <i class="fas fa-certificate"></i>
-            <span>Cisco CCNA (2024–2027)</span>
-          </div>
-          <div class="achievement-item">
-            <i class="fas fa-newspaper"></i>
-            <span>Featured in NIT magazine for Trinca e Molha</span>
-          </div>
-          <div class="achievement-item">
-            <i class="fas fa-users"></i>
-            <span>Team sports: Rugby, Football (Team Captain), Tennis</span>
-          </div>
-        </div>
-      </aside>
+      </div>
     </section>
 
-    <section id="contact" class="card contact-card">
-      <div class="card-header">
-        <h2><i class="fas fa-address-book"></i> Contact Information</h2>
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-rocket"></i>
+          Let's Build Something Amazing
+        </h2>
+        <p class="section-subtitle">Ready to turn ideas into reality</p>
       </div>
-      <div class="contact-grid">
-        <div class="contact-section">
-          <h3><i class="fas fa-envelope"></i> Email</h3>
-          <a href="mailto:afonsopalmeira2@gmail.com" class="contact-link">
-            <i class="fas fa-paper-plane"></i>
-            afonsopalmeira2@gmail.com
-          </a>
-          <p class="contact-note">Preferred method for professional inquiries</p>
-        </div>
-        
-        <div class="contact-section">
-          <h3><i class="fas fa-phone"></i> Phone</h3>
-          <a href="tel:+351963890065" class="contact-link">
-            <i class="fas fa-mobile-alt"></i>
-            +351 963 890 065
-          </a>
-          <p class="contact-note">Available during business hours (9AM-6PM CET)</p>
-        </div>
-        
-        <div class="contact-section">
-          <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
-          <div class="contact-link">
-            <i class="fas fa-globe-europe"></i>
-            Lisbon, Portugal
+
+      <div class="contact-container">
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Email</h3>
+            <a href="mailto:afonsopalmeira2@gmail.com" class="contact-link">
+              afonsopalmeira2@gmail.com
+            </a>
+            <p>Preferred for professional inquiries</p>
           </div>
-          <p class="contact-note">Open to remote work and relocation</p>
+
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <h3>Phone</h3>
+            <a href="tel:+351963890065" class="contact-link">
+              +351 963 890 065
+            </a>
+            <p>Available 9AM-6PM CET</p>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h3>Location</h3>
+            <div class="contact-link">
+              Lisbon, Portugal
+            </div>
+            <p>Open to remote & relocation</p>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-coffee"></i>
+            </div>
+            <h3>Coffee Chat</h3>
+            <div class="contact-link">
+              Let's meet!
+            </div>
+            <p>Always up for tech discussions</p>
+          </div>
+        </div>
+
+        <div class="contact-cta">
+          <div class="cta-content">
+            <h3>Ready to collaborate?</h3>
+            <p>I'm always excited to discuss new opportunities, innovative projects, or just chat about the latest in tech and entrepreneurship.</p>
+            
+            <div class="cta-buttons">
+              <a href="mailto:afonsopalmeira2@gmail.com?subject=Let's%20Collaborate!&body=Hi%20Afonso,%0A%0AI'd%20love%20to%20discuss..." class="btn btn-primary btn-lg">
+                <i class="fas fa-paper-plane"></i>
+                Send Message
+              </a>
+              <a href="https://www.linkedin.com/in/afonsolobopalmeira" target="_blank" class="btn btn-secondary btn-lg">
+                <i class="fab fa-linkedin"></i>
+                Connect on LinkedIn
+              </a>
+            </div>
+
+            <div class="social-links">
+              <a href="https://github.com/Bobalogic" target="_blank" class="social-link github">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/afonsolobopalmeira" target="_blank" class="social-link linkedin">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a href="https://www.instagram.com/trincaemolha/" target="_blank" class="social-link instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://bobalogic.github.io/CV" target="_blank" class="social-link portfolio">
+                <i class="fas fa-globe"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <div class="brand-icon">
+            <i class="fas fa-terminal"></i>
+          </div>
+          <div class="brand-info">
+            <div class="brand-name">Afonso Lobo Palmeira</div>
+            <div class="brand-tagline">Tech Entrepreneur & Software Engineer</div>
+          </div>
         </div>
         
-        <div class="contact-section">
-          <h3><i class="fas fa-network-wired"></i> Professional Networks</h3>
-          <div class="social-links">
-            <a href="https://www.linkedin.com/in/afonsolobopalmeira" target="_blank" rel="noreferrer" class="social-link linkedin">
-              <i class="fab fa-linkedin"></i>
-              LinkedIn Profile
-            </a>
-            <a href="https://github.com/Bobalogic" target="_blank" rel="noreferrer" class="social-link github">
-              <i class="fab fa-github"></i>
-              GitHub Portfolio
-            </a>
-            <a href="https://bobalogic.github.io/CV" target="_blank" rel="noreferrer" class="social-link portfolio">
-              <i class="fas fa-globe"></i>
-              Personal Website
-            </a>
+        <div class="footer-links">
+          <div class="footer-section">
+            <h4>Navigation</h4>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Connect</h4>
+            <a href="mailto:afonsopalmeira2@gmail.com">Email</a>
+            <a href="https://linkedin.com/in/afonsolobopalmeira" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Bobalogic" target="_blank">GitHub</a>
+            <a href="tel:+351963890065">Phone</a>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Projects</h4>
+            <a href="https://buildtrust-landing-page-95.pages.dev/" target="_blank">Fixity</a>
+            <a href="https://instagram.com/trincaemolha" target="_blank">Trinca e Molha</a>
+            <a href="#projects">All Projects</a>
+            <a href="#">Download CV</a>
           </div>
         </div>
       </div>
       
-      <div class="contact-cta">
-        <h3>Let's Connect!</h3>
-        <p>I'm always interested in discussing new opportunities, collaborations, or just having a chat about technology and innovation.</p>
-        <div class="cta-buttons">
-          <a href="mailto:afonsopalmeira2@gmail.com?subject=Professional%20Inquiry&body=Hi%20Afonso,%0A%0AI'm%20reaching%20out%20regarding..." class="btn btn-primary">
-            <i class="fas fa-envelope"></i>
-            Send Email
-          </a>
-          <a href="https://www.linkedin.com/in/afonsolobopalmeira" target="_blank" rel="noreferrer" class="btn btn-secondary">
-            <i class="fab fa-linkedin"></i>
-            Connect on LinkedIn
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <p>&copy; 2025 Afonso Lobo Palmeira</p>
-          <p>Built with vanilla HTML/CSS · Ready for GitHub Pages</p>
-        </div>
-        <div class="footer-section">
-          <div class="footer-links">
-            <a href="#top">Back to Top</a>
-            <a href="mailto:afonsopalmeira2@gmail.com">Contact</a>
-            <a href="https://github.com/Bobalogic" target="_blank">GitHub</a>
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <p>&copy; 2025 Afonso Lobo Palmeira. Crafted with passion for innovation.</p>
+          <div class="footer-tech">
+            <span>Built with</span>
+            <i class="fas fa-heart"></i>
+            <span>using modern web technologies</span>
           </div>
         </div>
       </div>
     </footer>
   </main>
 
+  <!-- Scripts -->
   <script>
-    // Add some interactive functionality
+    // Enhanced JavaScript for better interactivity
     document.addEventListener('DOMContentLoaded', function() {
       // Smooth scrolling for anchor links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-          });
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
         });
       });
 
-      // Add animation on scroll
+      // Intersection Observer for animations
       const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -519,8 +824,69 @@
         });
       }, observerOptions);
 
-      document.querySelectorAll('.card').forEach(card => {
-        observer.observe(card);
+      // Observe sections for animations
+      document.querySelectorAll('.section, .project-card, .experience-card, .contact-card').forEach(element => {
+        observer.observe(element);
+      });
+
+      // Navbar scroll effect
+      const navbar = document.querySelector('.navbar');
+      let lastScrollY = window.scrollY;
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+
+        // Hide/show navbar on scroll
+        if (window.scrollY > lastScrollY && window.scrollY > 200) {
+          navbar.style.transform = 'translateY(-100%)';
+        } else {
+          navbar.style.transform = 'translateY(0)';
+        }
+        lastScrollY = window.scrollY;
+      });
+
+      // Mobile menu toggle
+      const mobileToggle = document.querySelector('.mobile-menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (mobileToggle && navLinks) {
+        mobileToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          mobileToggle.classList.toggle('active');
+        });
+      }
+
+      // Typing animation for hero title
+      const heroTitle = document.querySelector('.hero-title');
+      if (heroTitle) {
+        const text = heroTitle.innerHTML;
+        heroTitle.innerHTML = '';
+        let i = 0;
+        
+        function typeWriter() {
+          if (i < text.length) {
+            heroTitle.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+          }
+        }
+        
+        setTimeout(typeWriter, 1000);
+      }
+
+      // Parallax effect for floating elements
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelectorAll('.float-icon');
+        
+        parallax.forEach((element, index) => {
+          const speed = 0.2 + (index * 0.1);
+          element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
       });
     });
   </script>
