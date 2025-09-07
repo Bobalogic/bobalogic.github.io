@@ -5,73 +5,524 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Afonso Lobo Palmeira · Digital CV</title>
   <meta name="description" content="Digital CV of Afonso Lobo Palmeira">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="bobalogic.github.io/Profile photograph.png" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
   <main class="container">
+    <!-- Animated background -->
+    <div class="animated-bg">
+      <div class="bg-circle bg-circle-1"></div>
+      <div class="bg-circle bg-circle-2"></div>
+      <div class="bg-circle bg-circle-3"></div>
+    </div>
+
     <header class="header">
       <div class="title">
-        <h1>Afonso Lobo Palmeira</h1>
-        <p>Software Engineer · Networking Security · Lisbon, Portugal</p>
+        <div class="profile-section">
+          <div class="profile-image">
+            <div class="profile-placeholder">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+          <div class="profile-info">
+            <h1>Afonso Lobo Palmeira</h1>
+            <p class="subtitle">Software Engineer · Networking Security · Lisbon, Portugal</p>
+            <div class="status-indicator">
+              <span class="status-dot"></span>
+              Available for opportunities
+            </div>
+          </div>
+        </div>
         <div class="badges">
-          <span class="badge">Computer Science Engineering (’24) @ IST</span>
-          <a class="badge" href="mailto:afonsopalmeira2@gmail.com">afonsopalmeira2@gmail.com</a>
-          <span class="badge">+351 963 890 065</span>
-          <a class="badge" href="https://www.linkedin.com/in/afonsolobopalmeira" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="badge" href="https://github.com/Bobalogic" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="badge" href="https://bobalogic.github.io/CV" target="_blank" rel="noreferrer">Portfolio</a>
+          <span class="badge education-badge">
+            <i class="fas fa-graduation-cap"></i>
+            Computer Science Engineering ('24) @ IST
+          </span>
+          <a class="badge contact-badge" href="mailto:afonsopalmeira2@gmail.com">
+            <i class="fas fa-envelope"></i>
+            afonsopalmeira2@gmail.com
+          </a>
+          <span class="badge contact-badge">
+            <i class="fas fa-phone"></i>
+            +351 963 890 065
+          </span>
+          <a class="badge social-badge" href="https://www.linkedin.com/in/afonsolobopalmeira" target="_blank" rel="noreferrer">
+            <i class="fab fa-linkedin"></i>
+            LinkedIn
+          </a>
+          <a class="badge social-badge" href="https://github.com/Bobalogic" target="_blank" rel="noreferrer">
+            <i class="fab fa-github"></i>
+            GitHub
+          </a>
+          <a class="badge social-badge" href="https://bobalogic.github.io/CV" target="_blank" rel="noreferrer">
+            <i class="fas fa-globe"></i>
+            Portfolio
+          </a>
         </div>
       </div>
-      <div>
-        <a class="btn" href="#contact">Contact</a>
-        <a class="print" href="javascript:window.print()">Print PDF</a>
+      <div class="header-actions">
+        <a class="btn btn-primary" href="#contact">
+          <i class="fas fa-envelope"></i>
+          Contact Me
+        </a>
+        <a class="btn btn-secondary" href="file:///c:/Users/apalmeir/OneDrive%20-%20Cisco/Desktop/AfonsoLoboPalmeira_Resume___june25.pdf" target="_blank">
+          <i class="fas fa-download"></i>
+          Download CV
+        </a>
+        <a class="btn btn-outline print-btn" href="javascript:window.print()">
+          <i class="fas fa-print"></i>
+          Print PDF
+        </a>
       </div>
     </header>
 
     <section class="grid">
-      <section class="card">
-        <h2>About</h2>
-        <p>Software Engineer with experience in software development and networking security. At Cisco, gained expertise in identity and access management and complex network troubleshooting. At Sky, contributed to Peacock and Showmax streaming platforms with TypeScript/JavaScript. Also experienced with Python, Java, SQL and modern frameworks. Curious, disciplined, and adaptable.</p>
+      <section class="card about-card">
+        <div class="card-header">
+          <h2><i class="fas fa-user-circle"></i> About</h2>
+        </div>
+        <p>Software Engineer with expertise in networking security and full-stack development. Currently at Cisco specializing in identity & access management and ISE troubleshooting. Previously contributed to major streaming platforms (Peacock, Showmax) and developed trading platforms. Experienced with Python, TypeScript/JavaScript, Java, SQL, and modern frameworks.</p>
+        <div class="key-highlights">
+          <div class="highlight-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>Security Expert</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fas fa-code"></i>
+            <span>Full-Stack Developer</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fas fa-network-wired"></i>
+            <span>Network Specialist</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fas fa-rocket"></i>
+            <span>Entrepreneur</span>
+          </div>
+        </div>
       </section>
       <aside class="card skills">
-        <h2>Skills</h2>
-        <div class="group"><h3>Programming</h3><div>Python, Java, TypeScript/JavaScript, SQL, C/C++</div></div><div class="group"><h3>Frameworks & Tools</h3><div>React, Vue.js, Spring Boot, Flask, Firebase, Streamlit, Git, Cypress, Figma</div></div><div class="group"><h3>Networking & Security</h3><div>CCNA, Cisco ISE, Identity & Access Management, Network Access Control, Troubleshooting</div></div><div class="group"><h3>Languages</h3><div>English (Fluent), Portuguese (Native)</div></div>
+        <div class="card-header">
+          <h2><i class="fas fa-tools"></i> Skills</h2>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3><i class="fas fa-laptop-code"></i> Programming</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">C/C++</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3><i class="fas fa-cogs"></i> Frameworks & Tools</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Vue.js</span>
+              <span class="skill-tag">Spring Boot</span>
+              <span class="skill-tag">Flask</span>
+              <span class="skill-tag">Firebase</span>
+              <span class="skill-tag">Git</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3><i class="fas fa-shield-alt"></i> Networking & Security</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">CCNA</span>
+              <span class="skill-tag">Cisco ISE</span>
+              <span class="skill-tag">IAM</span>
+              <span class="skill-tag">NAC</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3><i class="fas fa-globe"></i> Languages</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">English (Fluent)</span>
+              <span class="skill-tag">Portuguese (Native)</span>
+            </div>
+          </div>
+        </div>
       </aside>
     </section>
 
-    <section class="card">
-      <h2>Experience</h2>
-      <div class="list">
-        <div class="item"><h3>Security Technical Consulting Engineer (TAC AAA) — Cisco Systems</h3><div class="meta">Lisbon, Portugal · Sept 2024 – Present</div><ul><li>Troubleshoot complex identity/access/policy incidents.</li><li>Advanced support in Cisco Identity Services Engine (ISE).</li><li>Cross‑functional collaboration on security configurations and policies.</li></ul></div><div class="item"><h3>Apprentice Frontend Developer (Summer Internship) — Sky</h3><div class="meta">Lisbon, Portugal · Jul 2024 – Aug 2024</div><ul><li>Built upsell features for Peacock (+30M users) and Showmax in TypeScript/JS.</li><li>Agile workflow (stand‑ups, planning, code reviews).</li><li>Responsive UI and performance improvements across devices.</li></ul></div><div class="item"><h3>Software Engineering Intern (Summer Internship) — Critical Software</h3><div class="meta">Lisbon, Portugal · Jul 2023 – Aug 2023</div><ul><li>Developed beta crypto trading platform (Python, Django, Firebase).</li><li>IoT infra management tool (REST APIs, SQL, MQTT).</li><li>Code documentation; contributed to aerospace-related projects.</li></ul></div><div class="item"><h3>Co‑Founder & Business Owner (Seasonal) — Trinca e Molha</h3><div class="meta">Lisbon, Portugal · 2024</div><ul><li>101.5% ROI in 17 days; 4,000+ burgers; 300K IG reach.</li><li>Supplier negotiation, ops, branding; featured in NIT.</li><li>Stakeholder engagement incl. Mayor of Oeiras visit.</li></ul></div>
+    <section class="card experience-card">
+      <div class="card-header">
+        <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
+      </div>
+      
+      <div class="experience-sections">
+        <!-- Technical Experience -->
+        <div class="experience-section">
+          <h3><i class="fas fa-laptop-code"></i> Technical Experience</h3>
+          <div class="experience-timeline">
+            <div class="experience-item">
+              <div class="experience-dot"></div>
+              <div class="experience-content">
+                <h3>Security Technical Consulting Engineer (TAC AAA)</h3>
+                <div class="company">Cisco Systems</div>
+                <div class="meta">
+                  <span><i class="fas fa-map-marker-alt"></i> Lisbon, Portugal</span>
+                  <span><i class="fas fa-calendar-alt"></i> Sept 2024 – Present</span>
+                </div>
+                <ul>
+                  <li>Troubleshoot complex identity/access/policy incidents</li>
+                  <li>Advanced support in Cisco Identity Services Engine (ISE)</li>
+                  <li>Cross‑functional collaboration on security configurations</li>
+                </ul>
+                <div class="tech-badges">
+                  <span class="tech-badge cisco">Cisco ISE</span>
+                  <span class="tech-badge">Network Security</span>
+                  <span class="tech-badge">RADIUS</span>
+                  <span class="tech-badge">TACACS+</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="experience-item">
+              <div class="experience-dot"></div>
+              <div class="experience-content">
+                <h3>Apprentice Frontend Developer</h3>
+                <div class="company">Sky</div>
+                <div class="meta">
+                  <span><i class="fas fa-map-marker-alt"></i> Lisbon, Portugal</span>
+                  <span><i class="fas fa-calendar-alt"></i> Jul 2024 – Aug 2024</span>
+                </div>
+                <ul>
+                  <li>Built upsell features for Peacock (+30M users) and Showmax</li>
+                  <li>Agile workflow with stand‑ups, planning, code reviews</li>
+                  <li>Responsive UI and performance improvements</li>
+                </ul>
+                <div class="tech-badges">
+                  <span class="tech-badge typescript">TypeScript</span>
+                  <span class="tech-badge javascript">JavaScript</span>
+                  <span class="tech-badge react">React</span>
+                  <span class="tech-badge">CSS</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="experience-item">
+              <div class="experience-dot"></div>
+              <div class="experience-content">
+                <h3>Software Engineering Intern</h3>
+                <div class="company">Critical Software</div>
+                <div class="meta">
+                  <span><i class="fas fa-map-marker-alt"></i> Lisbon, Portugal</span>
+                  <span><i class="fas fa-calendar-alt"></i> Jul 2023 – Aug 2023</span>
+                </div>
+                <ul>
+                  <li>Developed beta crypto trading platform</li>
+                  <li>IoT infrastructure management tool</li>
+                  <li>Code documentation and aerospace projects</li>
+                </ul>
+                <div class="tech-badges">
+                  <span class="tech-badge python">Python</span>
+                  <span class="tech-badge django">Django</span>
+                  <span class="tech-badge">Firebase</span>
+                  <span class="tech-badge">REST APIs</span>
+                  <span class="tech-badge">SQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Entrepreneurial Experience -->
+        <div class="experience-section">
+          <h3><i class="fas fa-rocket"></i> Entrepreneurial Experience</h3>
+          <div class="experience-timeline">
+            <div class="experience-item">
+              <div class="experience-dot"></div>
+              <div class="experience-content">
+                <h3>Co‑Founder & Business Owner</h3>
+                <div class="company">Trinca e Molha</div>
+                <div class="meta">
+                  <span><i class="fas fa-map-marker-alt"></i> Lisbon, Portugal</span>
+                  <span><i class="fas fa-calendar-alt"></i> Summer 2024</span>
+                </div>
+                <ul>
+                  <li>101.5% ROI in 17 days; 4,000+ burgers served</li>
+                  <li>300K+ Instagram reach and social media presence</li>
+                  <li>Supplier negotiation, operations, and branding</li>
+                  <li>Featured in NIT magazine; Mayor of Oeiras visit</li>
+                </ul>
+                <div class="experience-links">
+                  <a href="https://www.instagram.com/trincaemolha/" target="_blank" class="experience-link instagram">
+                    <i class="fab fa-instagram"></i> Instagram
+                  </a>
+                  <a href="#" target="_blank" class="experience-link news">
+                    <i class="fas fa-newspaper"></i> NIT Article
+                  </a>
+                </div>
+                <div class="tech-badges">
+                  <span class="tech-badge">Business Development</span>
+                  <span class="tech-badge">Marketing</span>
+                  <span class="tech-badge">Operations</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="experience-item">
+              <div class="experience-dot"></div>
+              <div class="experience-content">
+                <h3>Co‑Founder & Developer</h3>
+                <div class="company">Fixity</div>
+                <div class="meta">
+                  <span><i class="fas fa-calendar-alt"></i> Side Project - Ongoing</span>
+                </div>
+                <ul>
+                  <li>Exploring solutions for digital trust and transparency</li>
+                  <li>Full-stack development and product strategy</li>
+                  <li>Building innovative blockchain-based solutions</li>
+                </ul>
+                <div class="experience-links">
+                  <a href="https://buildtrust-landing-page-95.pages.dev/" target="_blank" class="experience-link">
+                    <i class="fas fa-globe"></i> Website
+                  </a>
+                </div>
+                <div class="tech-badges">
+                  <span class="tech-badge">Web Development</span>
+                  <span class="tech-badge">Product Strategy</span>
+                  <span class="tech-badge">Blockchain</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Other Relevant Experience -->
+      <div class="other-experiences">
+        <h4><i class="fas fa-plus-circle"></i> Other Relevant Experience</h4>
+        <div class="other-experience-list">
+          <div class="other-experience-item">
+            <span class="role">Student Union Representative</span>
+            <span class="period">2022-2023</span>
+          </div>
+          <div class="other-experience-item">
+            <span class="role">Mathematics Tutor - IST Tutoring Center</span>
+            <span class="period">2022-2024</span>
+          </div>
+          <div class="other-experience-item">
+            <span class="role">Private Mathematics & Physics Tutor</span>
+            <span class="period">2021-2024</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="grid">
-      <section class="card">
-        <h2>Projects</h2>
-        <div class="list">
-          <div class="item"><h3><a href="https://buildtrust-landing-page-95.pages.dev/" target="_blank" rel="noreferrer">Fixity</a></h3><div class="meta">Co‑Founder & Developer (side project)</div><p>Exploring solutions for digital trust and transparency.</p></div><div class="item"><h3>Técnico Investment Club</h3><div class="meta">Asset Manager</div><p>Managed virtual portfolio and financial analysis.</p></div><div class="item"><h3>Gorilla Project</h3><div class="meta">Developer</div><p>Python software for Explicandum; boosted traffic 100%+.</p></div><div class="item"><h3>Carbon Tree Project</h3><div class="meta">Contributor</div><p>IoT air quality analysis with ITQB‑Nova & Oeiras Valley.</p></div>
+      <section class="card projects-card">
+        <div class="card-header">
+          <h2><i class="fas fa-rocket"></i> Projects</h2>
+        </div>
+        <div class="projects-grid">
+          <div class="project-item">
+            <div class="project-icon">
+              <i class="fas fa-shield-check"></i>
+            </div>
+            <h3><a href="https://buildtrust-landing-page-95.pages.dev/" target="_blank" rel="noreferrer">Fixity</a></h3>
+            <div class="project-role">Co‑Founder & Developer (side project)</div>
+            <p>Exploring solutions for digital trust and transparency.</p>
+          </div>
+          <div class="project-item">
+            <div class="project-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Técnico Investment Club</h3>
+            <div class="project-role">Asset Manager</div>
+            <p>Managed virtual portfolio and financial analysis.</p>
+          </div>
+          <div class="project-item">
+            <div class="project-icon">
+              <i class="fab fa-python"></i>
+            </div>
+            <h3>Gorilla Project</h3>
+            <div class="project-role">Developer</div>
+            <p>Python software for Explicandum; boosted traffic 100%+.</p>
+          </div>
+          <div class="project-item">
+            <div class="project-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Carbon Tree Project</h3>
+            <div class="project-role">Contributor</div>
+            <p>IoT air quality analysis with ITQB‑Nova & Oeiras Valley.</p>
+          </div>
         </div>
       </section>
-      <aside class="card">
-        <h2>Education</h2>
-        <div class="list">
-          <div class="item"><h3>IST – University of Lisbon</h3><div class="meta">Computer Science Engineering · 2021 – 2024</div><div class="meta">Graduated (’24)</div></div><div class="item"><h3>NOVA SBE</h3><div class="meta">Management · 2022 – 2025</div><div class="meta">Enrollment currently frozen</div></div>
+      <aside class="card education-card">
+        <div class="card-header">
+          <h2><i class="fas fa-graduation-cap"></i> Education</h2>
         </div>
-        <h2 style="margin-top:14px">Achievements</h2>
-        <ul>
-          <li>Cisco CCNA (2024–2027)</li><li>Featured in NIT magazine for Trinca e Molha</li><li>Team sports: Rugby, Football (Team Captain), Tennis</li>
-        </ul>
+        <div class="education-list">
+          <div class="education-item">
+            <div class="education-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <div class="education-content">
+              <h3>IST – University of Lisbon</h3>
+              <div class="degree">Computer Science Engineering</div>
+              <div class="period">2021 – 2024</div>
+              <div class="status graduated">Graduated ('24)</div>
+            </div>
+          </div>
+          <div class="education-item">
+            <div class="education-icon">
+              <i class="fas fa-building"></i>
+            </div>
+            <div class="education-content">
+              <h3>NOVA SBE</h3>
+              <div class="degree">Management</div>
+              <div class="period">2022 – 2025</div>
+              <div class="status frozen">Enrollment currently frozen</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-header" style="margin-top: 24px;">
+          <h2><i class="fas fa-trophy"></i> Achievements</h2>
+        </div>
+        <div class="achievements-list">
+          <div class="achievement-item">
+            <i class="fas fa-certificate"></i>
+            <span>Cisco CCNA (2024–2027)</span>
+          </div>
+          <div class="achievement-item">
+            <i class="fas fa-newspaper"></i>
+            <span>Featured in NIT magazine for Trinca e Molha</span>
+          </div>
+          <div class="achievement-item">
+            <i class="fas fa-users"></i>
+            <span>Team sports: Rugby, Football (Team Captain), Tennis</span>
+          </div>
+        </div>
       </aside>
     </section>
 
-    <section id="contact" class="card">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:afonsopalmeira2@gmail.com">afonsopalmeira2@gmail.com</a> · LinkedIn: <a href="https://www.linkedin.com/in/afonsolobopalmeira">linkedin.com/in/afonsolobopalmeira</a> · GitHub: <a href="https://github.com/Bobalogic">github.com/Bobalogic</a></p>
+    <section id="contact" class="card contact-card">
+      <div class="card-header">
+        <h2><i class="fas fa-address-book"></i> Contact Information</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-section">
+          <h3><i class="fas fa-envelope"></i> Email</h3>
+          <a href="mailto:afonsopalmeira2@gmail.com" class="contact-link">
+            <i class="fas fa-paper-plane"></i>
+            afonsopalmeira2@gmail.com
+          </a>
+          <p class="contact-note">Preferred method for professional inquiries</p>
+        </div>
+        
+        <div class="contact-section">
+          <h3><i class="fas fa-phone"></i> Phone</h3>
+          <a href="tel:+351963890065" class="contact-link">
+            <i class="fas fa-mobile-alt"></i>
+            +351 963 890 065
+          </a>
+          <p class="contact-note">Available during business hours (9AM-6PM CET)</p>
+        </div>
+        
+        <div class="contact-section">
+          <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+          <div class="contact-link">
+            <i class="fas fa-globe-europe"></i>
+            Lisbon, Portugal
+          </div>
+          <p class="contact-note">Open to remote work and relocation</p>
+        </div>
+        
+        <div class="contact-section">
+          <h3><i class="fas fa-network-wired"></i> Professional Networks</h3>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/afonsolobopalmeira" target="_blank" rel="noreferrer" class="social-link linkedin">
+              <i class="fab fa-linkedin"></i>
+              LinkedIn Profile
+            </a>
+            <a href="https://github.com/Bobalogic" target="_blank" rel="noreferrer" class="social-link github">
+              <i class="fab fa-github"></i>
+              GitHub Portfolio
+            </a>
+            <a href="https://bobalogic.github.io/CV" target="_blank" rel="noreferrer" class="social-link portfolio">
+              <i class="fas fa-globe"></i>
+              Personal Website
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-cta">
+        <h3>Let's Connect!</h3>
+        <p>I'm always interested in discussing new opportunities, collaborations, or just having a chat about technology and innovation.</p>
+        <div class="cta-buttons">
+          <a href="mailto:afonsopalmeira2@gmail.com?subject=Professional%20Inquiry&body=Hi%20Afonso,%0A%0AI'm%20reaching%20out%20regarding..." class="btn btn-primary">
+            <i class="fas fa-envelope"></i>
+            Send Email
+          </a>
+          <a href="https://www.linkedin.com/in/afonsolobopalmeira" target="_blank" rel="noreferrer" class="btn btn-secondary">
+            <i class="fab fa-linkedin"></i>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
     </section>
 
-    <footer>© 2025 Afonso Lobo Palmeira · Built with vanilla HTML/CSS · Ready for GitHub Pages</footer>
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <p>&copy; 2025 Afonso Lobo Palmeira</p>
+          <p>Built with vanilla HTML/CSS · Ready for GitHub Pages</p>
+        </div>
+        <div class="footer-section">
+          <div class="footer-links">
+            <a href="#top">Back to Top</a>
+            <a href="mailto:afonsopalmeira2@gmail.com">Contact</a>
+            <a href="https://github.com/Bobalogic" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </main>
+
+  <script>
+    // Add some interactive functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      // Add animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.card').forEach(card => {
+        observer.observe(card);
+      });
+    });
+  </script>
 </body>
 </html>
