@@ -63,7 +63,9 @@ a{color:inherit}
 button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
 /* hero */
 .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:center}
-.hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0;container-type:inline-size}
+/* "calendário." is one long word: cap the PT title so it never runs under the illustration */
+.hero-copy h1[lang="pt"]{font-size:min(var(--t-h1),11cqi)}
 .lead{font-size:var(--t-lg);color:var(--soft);max-width:44ch}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-pill);padding:5px 12px;font-size:var(--t-sm);font-weight:500}
@@ -165,7 +167,7 @@ details p{margin:0;padding:0 18px 16px;color:var(--soft);font-size:var(--t-sm)}
 .stack{display:grid;min-width:0;padding:8px 0 24px}
 .stack>.week{grid-area:1/1}
 .week.back{transform:rotate(-5deg) translate(-12%,-16%) scale(.86);opacity:.75}
-.week.front{transform:rotate(2deg) translate(6%,18%);border-color:var(--cat-exam)}
+.week.front{transform:rotate(2deg) translate(6%,18%)}
 .week-head .auto{background:var(--cat-exam);color:var(--block-ink);font-weight:700;border-radius:var(--r-pill);padding:2px 9px;font-size:var(--t-xs)}
 .xgrid{display:grid;grid-template-columns:34px repeat(6,minmax(0,1fr));grid-template-rows:18px 22px repeat(8,22px);gap:3px;font-size:var(--t-micro)}
 .xgrid .dh{color:var(--soft);font-weight:700;text-align:center;align-self:center;white-space:nowrap}
@@ -179,11 +181,13 @@ details p{margin:0;padding:0 18px 16px;color:var(--soft);font-size:var(--t-sm)}
 .xm small{display:block;font-weight:500;opacity:.75;font-size:var(--t-micro)}
 .gets{display:flex;flex-direction:column;gap:24px}
 .gets-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.get{display:flex;flex-direction:column;gap:10px;min-width:0;border-top:6px solid var(--k);background:var(--card);border-radius:var(--r-lg);padding:20px 20px 22px}
+.get{display:flex;flex-direction:column;gap:10px;min-width:0;background:var(--card);border:1px solid var(--rule);border-radius:var(--r-lg);padding:22px 22px 14px}
+.get h3{display:flex;align-items:center;gap:10px;font-size:var(--t-lg)}
+.get h3::before{content:"";width:18px;height:18px;flex:none;border-radius:var(--r-xs);background:var(--k)}
 .get p{color:var(--soft);font-size:var(--t-sm)}
-.ev{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-.ev li{background:var(--paper);border-left:4px solid var(--k);border-radius:var(--r-sm);padding:8px 10px;font-weight:600;font-size:var(--t-sm);display:flex;flex-direction:column;line-height:1.3}
-.ev span{font-size:var(--t-xs);color:var(--soft);font-weight:600}
+.ev{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column}
+.ev li{padding:12px 0;border-top:1px solid var(--rule);font-weight:600;font-size:var(--t-sm);display:flex;flex-direction:column;align-items:flex-start;gap:2px;line-height:1.3}
+.ev span{font-size:var(--t-xs);font-weight:700;color:var(--block-ink);background:var(--k);border-radius:var(--r-xs);padding:1px 7px;margin-bottom:4px}
 .ev small{font-size:var(--t-xs);color:var(--soft);font-weight:500}
 @media (max-width:900px){.gets-row{grid-template-columns:minmax(0,1fr)}.week.front{transform:translateY(10%)}.week.back{transform:rotate(-3deg) translateY(-4%) scale(.94)}.stack{padding-bottom:48px}}
 @media (prefers-reduced-motion:no-preference){.xm,.allday{animation:drop .5s cubic-bezier(.2,1.4,.4,1) both}

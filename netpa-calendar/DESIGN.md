@@ -53,5 +53,6 @@ Display: Syne (headings, step numbers). Body: Figtree.
 - **Sticker**: the draggable bookmark. Brand lime, dashed ink border, slight tilt. It is the only draggable thing on the page.
 - **Step card**: number badge, then copy, then a drawn "screen". Stacks to one column below 900px.
 - **Screen**: a mock browser window. Decorative and `aria-hidden`; never put instructions only inside it.
-- **Event row** (`.ev li`): date meta, title, optional note. Left border in the category colour.
+- **Event row** (`.ev li`): a date tag filled with the category colour (text in `--block-ink`), then title and optional note. Rows are split by hairline `--rule` dividers; no coloured borders or stripes.
+- **What-you-get card** (`.get`): plain card with a 1px `--rule` border; the category shows as an 18px square before the heading, the same swatch as the hero list.
 - **Disclosure** (`details`): the whole header is the tap target. Used for the FAQ and the "copy the code" fallback.
