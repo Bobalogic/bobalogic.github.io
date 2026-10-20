@@ -142,13 +142,39 @@ summary::-webkit-details-marker{display:none}
 summary::after{content:"+";font-family:var(--display);font-size:1.2rem;line-height:1}
 details[open] summary::after{content:"–"}
 details p{margin-top:10px;color:var(--soft);font-size:.95rem}
-.gets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:-24px}
-.get{display:grid;grid-template-columns:14px minmax(0,1fr);gap:14px;align-items:start}
-.get i{width:14px;height:14px;border-radius:4px;margin-top:5px;display:block}
-.get div{display:flex;flex-direction:column;gap:4px;min-width:0}
-.get p{color:var(--soft);font-size:.95rem}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@media (max-width:900px){.gets{grid-template-columns:minmax(0,1fr);gap:18px;margin-top:0}}
+.three{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.three li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:12px;align-items:start}
+.three i{width:18px;height:18px;border-radius:5px;margin-top:3px;display:block}
+.three div{display:flex;flex-direction:column;min-width:0}
+.three b{font-size:1.12rem}
+.three span{color:var(--soft)}
+.stack{display:grid;min-width:0;padding:8px 0 24px}
+.stack>.week{grid-area:1/1}
+.week.back{transform:rotate(-5deg) translate(-12%,-16%) scale(.86);opacity:.75}
+.week.front{transform:rotate(2deg) translate(6%,18%);border-color:var(--pink)}
+.week-head .auto{background:var(--pink);color:var(--block-ink);font-weight:700;border-radius:999px;padding:2px 9px;font-size:.72rem}
+.xgrid{display:grid;grid-template-columns:34px repeat(6,minmax(0,1fr));grid-template-rows:18px 22px repeat(8,22px);gap:3px;font-size:.64rem}
+.xgrid .dh{color:var(--soft);font-weight:700;text-align:center;align-self:center;white-space:nowrap}
+.xgrid .hr{color:var(--soft);text-align:right;padding-right:4px;line-height:1}
+.xgrid .hr.ad{grid-row:2;align-self:center;font-size:.55rem}
+.xgrid .bg{background:var(--grid);border-radius:4px}
+.allday{grid-row:2;background:var(--mint);color:var(--block-ink);font-weight:700;border-radius:6px;padding:3px 8px;align-self:stretch;display:flex;align-items:center;white-space:nowrap;overflow:hidden}
+.hol{z-index:1;border:1.5px dashed var(--soft);border-radius:6px;color:var(--soft);font-weight:700;writing-mode:vertical-rl;text-align:center;display:flex;align-items:center;justify-content:center;font-size:.6rem}
+.xm{z-index:1;background:var(--pink);color:var(--block-ink);border-radius:7px;padding:3px 5px;font-weight:700;line-height:1.1;overflow:hidden;box-shadow:0 2px 0 rgba(20,26,60,.12)}
+.xm em{display:block;font-style:normal;font-size:.52rem;letter-spacing:.06em;opacity:.8}
+.xm small{display:block;font-weight:500;opacity:.75;font-size:.56rem}
+.gets{display:flex;flex-direction:column;gap:24px}
+.gets-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.get{display:flex;flex-direction:column;gap:10px;min-width:0;border-top:6px solid var(--k);background:var(--card);border-radius:4px 4px 20px 20px;padding:20px 20px 22px}
+.get p{color:var(--soft);font-size:.95rem}
+.ev{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ev li{background:var(--paper);border-left:4px solid var(--k);border-radius:8px;padding:8px 10px;font-weight:600;font-size:.9rem;display:flex;flex-direction:column;line-height:1.3}
+.ev span{font-size:.75rem;color:var(--soft);font-weight:600}
+.ev small{font-size:.75rem;color:var(--soft);font-weight:500}
+@media (max-width:900px){.gets-row{grid-template-columns:minmax(0,1fr)}.week.front{transform:translateY(10%)}.week.back{transform:rotate(-3deg) translateY(-4%) scale(.94)}.stack{padding-bottom:48px}}
+@media (prefers-reduced-motion:no-preference){.xm,.allday{animation:drop .5s cubic-bezier(.2,1.4,.4,1) both}
+  .allday{animation-delay:1s}.xm:nth-of-type(1){animation-delay:1.15s}.xm:nth-of-type(2){animation-delay:1.25s}.xm:nth-of-type(3){animation-delay:1.35s}.xm:nth-of-type(4){animation-delay:1.45s}}
 .privacy{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;background:var(--ink);color:var(--paper);border-radius:22px;padding:22px 24px}
 .privacy svg{width:40px;height:40px;color:var(--lime)}
 .privacy p{opacity:.85}
@@ -180,10 +206,18 @@ footer strong{color:var(--ink)}
 
 <section class="hero">
   <div class="hero-copy">
-    <h1 lang="en">Your Nova timetable, in your calendar.</h1>
-    <h1 lang="pt">O teu horário da Nova, no teu calendário.</h1>
-    <p class="lead" lang="en">One bookmark reads your netPA Weekly Schedule and builds your calendar: every class with its room, the exams for your own courses, and the key dates of the academic year.</p>
-    <p class="lead" lang="pt">Um favorito lê o teu Weekly Schedule do netPA e monta o teu calendário: cada aula com a sala, os exames das tuas cadeiras e as datas importantes do ano letivo.</p>
+    <h1 lang="en">Your whole term, in your calendar.</h1>
+    <h1 lang="pt">O teu trimestre inteiro, no calendário.</h1>
+    <p class="lead" lang="en">Click one bookmark on netPA and your calendar fills itself with:</p>
+    <p class="lead" lang="pt">Clicas num favorito no netPA e o teu calendário fica com:</p>
+    <ul class="three">
+      <li><i style="background:var(--sun)"></i><div><b lang="en">Every class</b><b lang="pt">Todas as aulas</b>
+        <span lang="en">on its real date, with the room</span><span lang="pt">na data real, com a sala</span></div></li>
+      <li><i style="background:var(--pink)"></i><div><b lang="en">All your exams</b><b lang="pt">Todos os teus exames</b>
+        <span lang="en">only for your courses, from the official exam calendar</span><span lang="pt">só das tuas cadeiras, do calendário oficial de exames</span></div></li>
+      <li><i style="background:var(--mint)"></i><div><b lang="en">The year's key dates</b><b lang="pt">As datas do ano letivo</b>
+        <span lang="en">holidays, exam periods, enrollments, Add &amp; Drop</span><span lang="pt">feriados, épocas de exames, inscrições, Add &amp; Drop</span></div></li>
+    </ul>
     <div class="chips">
       <span class="chip" lang="en">3 minutes</span><span class="chip" lang="pt">3 minutos</span>
       <span class="chip">Google · Apple · Outlook</span>
@@ -192,36 +226,74 @@ footer strong{color:var(--ink)}
     <a class="cta" href="#step1"><span lang="en">Show me how</span><span lang="pt">Mostra-me como</span></a>
   </div>
 
-  <div class="week" aria-hidden="true">
-    <div class="week-head"><b lang="en">Example week</b><b lang="pt">Semana de exemplo</b><span>T2 · IMM</span></div>
-    <div class="grid">
-      <span></span><span class="dh">Mon</span><span class="dh">Tue</span><span class="dh">Wed</span><span class="dh">Thu</span><span class="dh">Fri</span>
-      <span class="hr" style="grid-row:2">08h</span><span class="hr" style="grid-row:4">09h</span><span class="hr" style="grid-row:6">10h</span>
-      <span class="hr" style="grid-row:8">12h</span><span class="hr" style="grid-row:10">15h</span><span class="hr" style="grid-row:12">18h</span>
-      <span class="bg" style="grid-column:2/7;grid-row:2/14;opacity:.55"></span>
-      <div class="blk c1" style="grid-column:2;grid-row:2/8">Small Business Mgmt<small>D-1.05</small></div>
-      <div class="blk c2" style="grid-column:3;grid-row:2/8">Product Mgmt in Tech<small>D-1.07</small></div>
-      <div class="blk c3" style="grid-column:5;grid-row:2/5">Financial Mgmt<small>D-1.06</small></div>
-      <div class="blk c4" style="grid-column:6;grid-row:2/5">Statistical Analysis<small>D-1.07</small></div>
-      <div class="blk c5" style="grid-column:4;grid-row:5/8">Strategy<small>D-1.10</small></div>
-      <div class="blk c5" style="grid-column:3;grid-row:8/10">Strategy<small>D-1.04</small></div>
-      <div class="blk c3" style="grid-column:3;grid-row:10/12">Fin. Statement Analysis<small>B.0.11</small></div>
-      <div class="blk c3" style="grid-column:2;grid-row:12/14">Fin. Statement Analysis<small>D-1.04</small></div>
+  <div class="stack" aria-hidden="true">
+    <div class="week back">
+      <div class="week-head"><b lang="en">Class week</b><b lang="pt">Semana de aulas</b><span>T2 · IMM</span></div>
+      <div class="grid">
+        <span></span><span class="dh">Mon</span><span class="dh">Tue</span><span class="dh">Wed</span><span class="dh">Thu</span><span class="dh">Fri</span>
+        <span class="hr" style="grid-row:2">08h</span><span class="hr" style="grid-row:6">10h</span><span class="hr" style="grid-row:10">15h</span>
+        <span class="bg" style="grid-column:2/7;grid-row:2/14;opacity:.55"></span>
+        <div class="blk c1" style="grid-column:2;grid-row:2/8">Small Business Mgmt<small>D-1.05</small></div>
+        <div class="blk c2" style="grid-column:3;grid-row:2/8">Product Mgmt in Tech<small>D-1.07</small></div>
+        <div class="blk c3" style="grid-column:5;grid-row:2/5">Financial Mgmt<small>D-1.06</small></div>
+        <div class="blk c4" style="grid-column:6;grid-row:2/5">Statistical Analysis<small>D-1.07</small></div>
+        <div class="blk c5" style="grid-column:4;grid-row:5/8">Strategy<small>D-1.10</small></div>
+        <div class="blk c5" style="grid-column:3;grid-row:8/10">Strategy<small>D-1.04</small></div>
+        <div class="blk c3" style="grid-column:3;grid-row:10/12">Fin. Statement Analysis<small>B.0.11</small></div>
+      </div>
+    </div>
+    <div class="week front">
+      <div class="week-head"><b lang="en">Exam week</b><b lang="pt">Semana de exames</b><span class="auto" lang="en">added for you</span><span class="auto" lang="pt">automático</span></div>
+      <div class="xgrid">
+        <span></span><span class="dh">Mon 7</span><span class="dh">Tue 8</span><span class="dh">Wed 9</span><span class="dh">Thu 10</span><span class="dh">Fri 11</span><span class="dh">Sat 12</span>
+        <span class="hr ad">all day</span>
+        <span class="allday" style="grid-column:2/8">Exam period – T2 + S1 finals</span>
+        <span class="hr" style="grid-row:4">08h</span><span class="hr" style="grid-row:6">11h</span><span class="hr" style="grid-row:8">14h</span><span class="hr" style="grid-row:10">17h</span>
+        <span class="bg" style="grid-column:2/8;grid-row:4/12;opacity:.55"></span>
+        <span class="hol" style="grid-column:3;grid-row:4/12">Holiday</span>
+        <div class="xm" style="grid-column:2;grid-row:4/6"><em>EXAM</em>Financial Mgmt<small>08:30</small></div>
+        <div class="xm" style="grid-column:6;grid-row:6/8"><em>EXAM</em>Strategy<small>11:30</small></div>
+        <div class="xm" style="grid-column:4;grid-row:8/10"><em>EXAM</em>Statistical Analysis<small>14:30</small></div>
+        <div class="xm" style="grid-column:7;grid-row:10/12"><em>EXAM</em>Fin. Statement An.<small>17:30</small></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="gets" aria-labelledby="gets-h">
-  <h2 id="gets-h" class="sr"><span lang="en">What you get</span><span lang="pt">O que recebes</span></h2>
-  <div class="get"><i style="background:var(--sun)"></i><div><h3 lang="en">Every class</h3><h3 lang="pt">Todas as aulas</h3>
-    <p lang="en">On its real date, with the room and a reminder 15 minutes before. Swapped days and Saturday sessions included.</p>
-    <p lang="pt">Na data real, com a sala e um alerta 15 minutos antes. Inclui dias trocados e aulas ao sábado.</p></div></div>
-  <div class="get"><i style="background:var(--pink)"></i><div><h3 lang="en">Your exams</h3><h3 lang="pt">Os teus exames</h3>
-    <p lang="en">Matched to your own courses from the official MSc exam calendar, with a reminder a week before and an hour before.</p>
-    <p lang="pt">Só os das tuas cadeiras, tirados do calendário oficial de exames do MSc, com alerta uma semana e uma hora antes.</p></div></div>
-  <div class="get"><i style="background:var(--mint)"></i><div><h3 lang="en">Key dates</h3><h3 lang="pt">Datas importantes</h3>
-    <p lang="en">Holidays, make-up days, exam periods, enrollments and Add &amp; Drop, through June 2027.</p>
-    <p lang="pt">Feriados, dias de compensação, épocas de exames, inscrições e Add &amp; Drop, até junho de 2027.</p></div></div>
+  <h2 id="gets-h"><span lang="en">What lands in your calendar</span><span lang="pt">O que entra no teu calendário</span></h2>
+  <div class="gets-row">
+    <div class="get" style="--k:var(--sun)">
+      <h3 lang="en">Every class</h3><h3 lang="pt">Todas as aulas</h3>
+      <p lang="en">Read week by week from your netPA, so swapped days, make-up days and Saturday sessions are right. Room and a 15-min reminder on each.</p>
+      <p lang="pt">Lidas semana a semana do teu netPA, por isso dias trocados, compensações e sábados ficam certos. Sala e alerta de 15 min em cada uma.</p>
+      <ul class="ev">
+        <li><span>Mon 26 Oct · 08:00</span>Small Business Management<small>Anfiteatro D. -1.05</small></li>
+        <li><span>Fri 4 Dec · 08:00</span>Product Mgmt in Technology<small lang="en">moved from Tue 1 Dec</small><small lang="pt">trocada de ter 1 dez</small></li>
+        <li><span>Sat 7 Nov · 09:00</span>Sustainability<small lang="en">Saturday module</small><small lang="pt">módulo de sábado</small></li>
+      </ul>
+    </div>
+    <div class="get" style="--k:var(--pink)">
+      <h3 lang="en">All your exams</h3><h3 lang="pt">Todos os teus exames</h3>
+      <p lang="en">Your courses are matched against the official MSc Exams &amp; Midterms calendar. You only get your own, with reminders a week and an hour before.</p>
+      <p lang="pt">As tuas cadeiras são cruzadas com o calendário oficial de Exams &amp; Midterms do MSc. Só recebes os teus, com alertas uma semana e uma hora antes.</p>
+      <ul class="ev">
+        <li><span>Mon 7 Dec · 08:30</span>EXAM: Financial Management<small lang="en">reminder 1 week before</small><small lang="pt">alerta 1 semana antes</small></li>
+        <li><span>Sat 12 Dec · 17:30</span>EXAM: Financial Statement Analysis<small>Room TBA</small></li>
+        <li><span>Sat 19 Dec · 11:30</span>PRESENTATION: Product Mgmt in Tech<small lang="en">presentations and midterms too</small><small lang="pt">apresentações e midterms também</small></li>
+      </ul>
+    </div>
+    <div class="get" style="--k:var(--mint)">
+      <h3 lang="en">The year's key dates</h3><h3 lang="pt">As datas do ano letivo</h3>
+      <p lang="en">From the official MSc academic calendar, through June 2027, so you never miss an enrollment window or a no-classes day.</p>
+      <p lang="pt">Do calendário académico oficial do MSc, até junho de 2027, para não perderes inscrições nem dias sem aulas.</p>
+      <ul class="ev">
+        <li><span>Thu 29 Oct</span>Estoril Conferences – no classes</li>
+        <li><span>18–20 Jan</span>Spring enrollments<small lang="en">reminder 3 days before</small><small lang="pt">alerta 3 dias antes</small></li>
+        <li><span>26–28 Jan</span>Add &amp; Drop – T3</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <section style="display:flex;flex-direction:column;gap:28px" id="step1">
