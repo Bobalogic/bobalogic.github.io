@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Turn your Nova SBE netPA Weekly Schedule into Google, Apple or Outlook calendar events in 3 minutes. One bookmark, no password.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="netPA to Calendar">
+<meta property="og:description" content="Your Nova timetable in your calendar: every class on the right day, with the room and a 15-minute reminder.">
+<meta property="og:url" content="https://bobalogic.github.io/netpa-calendar/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>netPA to Calendar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: student-planner look. Hero = headline left, a week grid that fills itself with classes right.
+   Below, a 4-step path down a single column; each step pairs short copy with a drawn "screen". Left-aligned throughout.
+   Colors are sticky-note class blocks on a cool paper ground; the one bold moment is the hero week filling up. */
+:root{
+  --paper:#eef1fb; --card:#ffffff; --ink:#141a3c; --soft:#5a6283; --rule:#d7dcef;
+  --cobalt:#3150f5; --on-cobalt:#ffffff; --lime:#c9f25b; --pink:#ff9cbf; --sun:#ffd23f; --mint:#7fe0c4;
+  --block-ink:#141a3c; --grid:#e3e7f5; --shadow:rgba(20,26,60,.18);
+  --display:"Syne","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Figtree","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f1430; --card:#19204a; --ink:#eef0ff; --soft:#a4abd0; --rule:#2c3566;
+  --cobalt:#6e86ff; --on-cobalt:#0b1030; --grid:#222a58; --shadow:rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f1430; --card:#19204a; --ink:#eef0ff; --soft:#a4abd0; --rule:#2c3566;
+  --cobalt:#6e86ff; --on-cobalt:#0b1030; --grid:#222a58; --shadow:rgba(0,0,0,.5); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 72px}
+[data-l="en"] [lang="pt"],[data-l="pt"] [lang="en"]{display:none!important}
+.wrap{max-width:1060px;margin:0 auto;display:flex;flex-direction:column;gap:72px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2.3rem,6vw,4.1rem);line-height:1;font-weight:800}
+h2{font-size:clamp(1.5rem,3vw,2rem);line-height:1.1;font-weight:700}
+h3{font-size:1.05rem;font-weight:700;font-family:var(--body)}
+p{margin:0}
+a{color:inherit}
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-family:var(--display);font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:8px}
+.brand i{width:22px;height:22px;border-radius:6px;background:var(--cobalt);display:inline-block;position:relative}
+.brand i::after{content:"";position:absolute;inset:7px 4px 4px;background:var(--lime);border-radius:2px}
+.seg{display:inline-flex;background:var(--card);border:1px solid var(--rule);border-radius:999px;padding:3px}
+.seg button{font:inherit;font-size:.85rem;font-weight:600;border:0;background:transparent;color:var(--soft);padding:5px 14px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:center}
+.hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.lead{font-size:1.2rem;color:var(--soft);max-width:44ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--card);border:1px solid var(--rule);border-radius:999px;padding:5px 12px;font-size:.88rem;font-weight:500}
+.cta{display:inline-flex;align-self:flex-start;align-items:center;gap:10px;background:var(--cobalt);color:var(--on-cobalt);text-decoration:none;font-weight:700;padding:14px 22px;border-radius:14px;box-shadow:0 6px 0 -1px var(--ink)}
+.cta:active{transform:translateY(3px);box-shadow:0 3px 0 -1px var(--ink)}
+.week{background:var(--card);border-radius:22px;padding:18px;box-shadow:0 24px 50px -28px var(--shadow);border:1px solid var(--rule);min-width:0;transform:rotate(1.2deg)}
+.week-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;gap:8px}
+.week-head b{font-family:var(--display);font-size:1rem}
+.week-head span{font-size:.8rem;color:var(--soft)}
+.grid{display:grid;grid-template-columns:34px repeat(5,minmax(0,1fr));grid-template-rows:20px repeat(12,22px);gap:3px;font-size:.66rem}
+.grid .dh{color:var(--soft);font-weight:700;text-align:center;align-self:center}
+.grid .hr{color:var(--soft);text-align:right;padding-right:4px;line-height:1}
+.grid .bg{background:var(--grid);border-radius:4px}
+.blk{border-radius:7px;padding:4px 6px;color:var(--block-ink);font-weight:700;line-height:1.15;overflow:hidden;z-index:1;box-shadow:0 2px 0 rgba(20,26,60,.12)}
+.blk small{display:block;font-weight:500;opacity:.75;font-size:.58rem}
+.c1{background:var(--sun)}.c2{background:var(--pink)}.c3{background:var(--lime)}.c4{background:var(--mint)}.c5{background:#b9c4ff}
+@media (prefers-reduced-motion:no-preference){
+  .blk{animation:drop .5s cubic-bezier(.2,1.4,.4,1) both}
+  .blk:nth-of-type(1){animation-delay:.15s}.blk:nth-of-type(2){animation-delay:.25s}.blk:nth-of-type(3){animation-delay:.35s}
+  .blk:nth-of-type(4){animation-delay:.45s}.blk:nth-of-type(5){animation-delay:.55s}.blk:nth-of-type(6){animation-delay:.65s}
+  .blk:nth-of-type(7){animation-delay:.75s}.blk:nth-of-type(8){animation-delay:.85s}
+  @keyframes drop{from{transform:translateY(-14px) scale(.92);opacity:.25}to{transform:none;opacity:1}}
+}
+/* phone notice */
+.phone{display:none;background:var(--ink);color:var(--paper);border-radius:16px;padding:14px 16px;font-size:.95rem;gap:4px;flex-direction:column}
+.phone b{font-family:var(--display)}
+@media (max-width:760px),(pointer:coarse){.phone{display:flex}}
+/* steps */
+.steps-head{display:flex;flex-direction:column;gap:8px}
+.steps-head p{color:var(--soft)}
+.steps{display:flex;flex-direction:column;gap:28px;counter-reset:s}
+.step{display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,1.05fr);gap:28px;align-items:start;background:var(--card);border:1px solid var(--rule);border-radius:24px;padding:28px}
+.n{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--block-ink)}
+.step:nth-child(1) .n{background:var(--sun)}.step:nth-child(2) .n{background:var(--pink)}.step:nth-child(3) .n{background:var(--lime)}.step:nth-child(4) .n{background:var(--mint)}
+.txt{display:flex;flex-direction:column;gap:12px;min-width:0}
+.txt ol{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:6px}
+.hint{font-size:.92rem;color:var(--soft)}
+kbd{font-family:var(--body);font-weight:700;font-size:.8em;background:var(--paper);border:1px solid var(--rule);border-bottom-width:3px;border-radius:6px;padding:1px 7px}
+/* the bookmark sticker */
+.sticker{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:var(--lime);color:var(--block-ink);text-decoration:none;font-weight:800;font-family:var(--display);
+  font-size:1.05rem;padding:13px 20px 13px 16px;border-radius:14px;border:2px dashed var(--block-ink);cursor:grab;transform:rotate(-1.5deg)}
+.sticker:active{cursor:grabbing}
+.sticker svg{width:22px;height:22px}
+.alt{border-top:1px dashed var(--rule);padding-top:12px;display:flex;flex-direction:column;gap:8px}
+.ghostbtn{font:inherit;font-size:.9rem;font-weight:600;align-self:flex-start;background:transparent;color:var(--ink);border:1.5px solid var(--ink);border-radius:10px;padding:7px 14px;cursor:pointer}
+textarea{width:100%;height:56px;font-family:ui-monospace,Menlo,monospace;font-size:.7rem;background:var(--paper);color:var(--soft);border:1px solid var(--rule);border-radius:10px;padding:8px;resize:none}
+/* drawn screens */
+.scr{background:var(--paper);border:1px solid var(--rule);border-radius:16px;overflow:hidden;min-width:0}
+.chrome{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--grid)}
+.chrome .d{display:flex;gap:5px}.chrome .d i{width:9px;height:9px;border-radius:50%;background:var(--rule);display:block}
+.chrome .u{flex:1;background:var(--card);border-radius:999px;padding:3px 12px;font-size:.7rem;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.favs{display:flex;gap:6px;padding:7px 10px;border-bottom:1px solid var(--rule);font-size:.72rem;color:var(--soft);flex-wrap:wrap;background:var(--card)}
+.favs span{padding:2px 8px;border-radius:6px;background:var(--paper)}
+.favs .on{background:var(--lime);color:var(--block-ink);font-weight:700;outline:2px dashed var(--block-ink)}
+.sbody{padding:16px;display:flex;flex-direction:column;gap:12px;position:relative;min-height:150px}
+.tag{align-self:flex-start;background:var(--ink);color:var(--paper);font-size:.74rem;font-weight:700;padding:4px 10px;border-radius:8px}
+.arrow{display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--soft)}
+.arrow svg{width:64px;height:34px;flex:none;color:var(--ink)}
+.np{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:10px}
+.np>div{background:var(--card);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;font-size:.72rem;min-width:0}
+.np .t{font-family:var(--display);font-weight:700;font-size:.85rem}
+.mini{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.mini i{height:14px;border-radius:3px;background:var(--grid);display:block}
+.mini .a{background:var(--sun)}.mini .b{background:var(--pink)}.mini .c{background:var(--lime)}
+.menu .m{color:var(--soft)}
+.menu .m.on{background:var(--sun);color:var(--block-ink);font-weight:700;border-radius:5px;padding:2px 6px;outline:2px dashed var(--block-ink)}
+.toast{position:absolute;top:14px;right:14px;background:var(--ink);color:var(--paper);font-size:.72rem;padding:8px 11px;border-radius:9px;box-shadow:0 8px 18px -8px var(--shadow)}
+.file{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:10px 12px;font-size:.78rem;margin-top:auto}
+.file .ic{width:30px;height:36px;border-radius:6px;background:var(--cobalt);color:var(--on-cobalt);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800}
+.file b{display:block}
+.file span{color:var(--soft)}
+.apps{display:flex;gap:6px;flex-wrap:wrap}
+.apps button{font:inherit;font-size:.88rem;font-weight:600;border:1.5px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+.apps button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.panel ol{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:6px}
+.tinycal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.tinycal .h{font-size:.62rem;color:var(--soft);font-weight:700;text-align:center}
+.tinycal .x{min-height:56px;border-radius:7px;padding:5px;font-size:.6rem;font-weight:700;color:var(--block-ink);line-height:1.15}
+.tinycal .e{background:var(--grid)}
+/* faq + footer */
+.faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+details{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:16px 18px;min-width:0}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--display);font-size:1.2rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--soft);font-size:.95rem}
+.privacy{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;background:var(--ink);color:var(--paper);border-radius:22px;padding:22px 24px}
+.privacy svg{width:40px;height:40px;color:var(--lime)}
+.privacy p{opacity:.85}
+footer{color:var(--soft);font-size:.9rem;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--rule);padding-top:22px}
+footer strong{color:var(--ink)}
+.contact{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.mail{font-weight:700;color:var(--ink);user-select:all;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:4px 10px}
+.ghostbtn.small{font-size:.82rem;padding:4px 10px}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr);gap:36px}.week{transform:none}
+  .step{grid-template-columns:minmax(0,1fr);gap:18px;padding:22px}.faq{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app" data-l="en">
+
+<div class="top">
+  <span class="brand"><i aria-hidden="true"></i>netPA to Calendar</span>
+  <div class="seg" role="group" aria-label="Language">
+    <button type="button" id="l-en" aria-pressed="true">EN</button>
+    <button type="button" id="l-pt" aria-pressed="false">PT</button>
+  </div>
+</div>
+
+<div class="phone" role="note">
+  <b lang="en">Open this page on your laptop</b><b lang="pt">Abre esta página no portátil</b>
+  <span lang="en">netPA and bookmarks only work properly on a computer. Do steps 1–3 there; the calendar then syncs to your phone.</span>
+  <span lang="pt">O netPA e os favoritos só funcionam bem no computador. Faz os passos 1–3 lá; depois o calendário sincroniza para o telemóvel.</span>
+</div>
+
+<section class="hero">
+  <div class="hero-copy">
+    <h1 lang="en">Your Nova timetable, in your calendar.</h1>
+    <h1 lang="pt">O teu horário da Nova, no teu calendário.</h1>
+    <p class="lead" lang="en">One bookmark reads your netPA Weekly Schedule and turns every class into a calendar event, on the right day, with the room and a 15-minute reminder.</p>
+    <p class="lead" lang="pt">Um favorito lê o teu Weekly Schedule do netPA e transforma cada aula num evento, no dia certo, com a sala e um alerta 15 minutos antes.</p>
+    <div class="chips">
+      <span class="chip" lang="en">3 minutes</span><span class="chip" lang="pt">3 minutos</span>
+      <span class="chip">Google · Apple · Outlook</span>
+      <span class="chip" lang="en">No password needed</span><span class="chip" lang="pt">Sem password</span>
+    </div>
+    <a class="cta" href="#step1"><span lang="en">Show me how</span><span lang="pt">Mostra-me como</span></a>
+  </div>
+
+  <div class="week" aria-hidden="true">
+    <div class="week-head"><b lang="en">Example week</b><b lang="pt">Semana de exemplo</b><span>T2 · IMM</span></div>
+    <div class="grid">
+      <span></span><span class="dh">Mon</span><span class="dh">Tue</span><span class="dh">Wed</span><span class="dh">Thu</span><span class="dh">Fri</span>
+      <span class="hr" style="grid-row:2">08h</span><span class="hr" style="grid-row:4">09h</span><span class="hr" style="grid-row:6">10h</span>
+      <span class="hr" style="grid-row:8">12h</span><span class="hr" style="grid-row:10">15h</span><span class="hr" style="grid-row:12">18h</span>
+      <span class="bg" style="grid-column:2/7;grid-row:2/14;opacity:.55"></span>
+      <div class="blk c1" style="grid-column:2;grid-row:2/8">Small Business Mgmt<small>D-1.05</small></div>
+      <div class="blk c2" style="grid-column:3;grid-row:2/8">Product Mgmt in Tech<small>D-1.07</small></div>
+      <div class="blk c3" style="grid-column:5;grid-row:2/5">Financial Mgmt<small>D-1.06</small></div>
+      <div class="blk c4" style="grid-column:6;grid-row:2/5">Statistical Analysis<small>D-1.07</small></div>
+      <div class="blk c5" style="grid-column:4;grid-row:5/8">Strategy<small>D-1.10</small></div>
+      <div class="blk c5" style="grid-column:3;grid-row:8/10">Strategy<small>D-1.04</small></div>
+      <div class="blk c3" style="grid-column:3;grid-row:10/12">Fin. Statement Analysis<small>B.0.11</small></div>
+      <div class="blk c3" style="grid-column:2;grid-row:12/14">Fin. Statement Analysis<small>D-1.04</small></div>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:28px" id="step1">
+  <div class="steps-head">
+    <h2 lang="en">Four steps, once per term</h2><h2 lang="pt">Quatro passos, uma vez por trimestre</h2>
+    <p lang="en">Do this on your laptop, in Chrome, Edge, Firefox or Safari.</p>
+    <p lang="pt">Faz isto no portátil, em Chrome, Edge, Firefox ou Safari.</p>
+  </div>
+  <div class="steps">
+
+    <article class="step">
+      <span class="n">1</span>
+      <div class="txt">
+        <h3 lang="en">Add the bookmark</h3><h3 lang="pt">Adiciona o favorito</h3>
+        <ol lang="en"><li>Show your bookmarks bar: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>B</kbd> (Mac: <kbd>⌘</kbd> <kbd>Shift</kbd> <kbd>B</kbd>).</li><li>Drag the green sticker below onto that bar.</li></ol>
+        <ol lang="pt"><li>Mostra a barra de favoritos: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>B</kbd> (Mac: <kbd>⌘</kbd> <kbd>Shift</kbd> <kbd>B</kbd>).</li><li>Arrasta o autocolante verde para essa barra.</li></ol>
+        <a class="sticker" href="javascript:(async%20function%20()%20%7B%0Avar%20UI%20%3D%20!window.__netpaNoUI%3B%0Avar%20MAX_WEEKS%20%3D%2030%2C%20EMPTY_STOP%20%3D%204%3B%0Afunction%20T(e)%20%7B%20return%20(e.innerText%20%7C%7C%20e.textContent%20%7C%7C%20'').replace(%2F%5Cs%2B%2Fg%2C%20'%20').trim()%3B%20%7D%0Afunction%20pad(n)%20%7B%20return%20String(n).padStart(2%2C%20'0')%3B%20%7D%0Afunction%20extract(root)%20%7B%0Avar%20cells%20%3D%20Array.prototype.filter.call(root.querySelectorAll('th%2Ctd')%2C%20function%20(e)%20%7B%0Areturn%20!e.querySelector('td%2Cth')%3B%0A%7D)%3B%0Avar%20hdr%20%3D%20cells.filter(function%20(e)%20%7B%0Areturn%20%2F%5E(Mon%7CTue%7CWed%7CThu%7CFri%7CSat%7CSun%7CDom%7CSeg%7CTer%7CQua%7CQui%7CSex%7CS%5B%C3%A1a%5Db)%5Cs*%5Cd%7B1%2C2%7D-%5Cd%7B1%2C2%7D%24%2Fi.test(T(e))%3B%0A%7D).map(function%20(e)%20%7B%0Avar%20b%20%3D%20e.getBoundingClientRect()%2C%20m%20%3D%20T(e).match(%2F(%5Cd%7B1%2C2%7D)-(%5Cd%7B1%2C2%7D)%24%2F)%3B%0Areturn%20%7B%20d%3A%20%2Bm%5B1%5D%2C%20mo%3A%20%2Bm%5B2%5D%2C%20c%3A%20(b.left%20%2B%20b.right)%20%2F%202%20%7D%3B%0A%7D)%3B%0Avar%20times%20%3D%20cells.filter(function%20(e)%20%7B%20return%20%2F%5E%5Cd%7B1%2C2%7Dh%5Cd%7B2%7D%24%2F.test(T(e))%3B%20%7D).map(function%20(e)%20%7B%0Avar%20m%20%3D%20T(e).match(%2F(%5Cd%2B)h(%5Cd%2B)%2F)%3B%0Areturn%20%7B%20m%3A%20%2Bm%5B1%5D%20*%2060%20%2B%20%2Bm%5B2%5D%2C%20top%3A%20e.getBoundingClientRect().top%20%7D%3B%0A%7D).sort(function%20(a%2C%20b)%20%7B%20return%20a.m%20-%20b.m%3B%20%7D)%3B%0Aif%20(hdr.length%20%3C%205%20%7C%7C%20times.length%20%3C%204)%20return%20null%3B%0Avar%20t0%20%3D%20times%5B0%5D%2C%20t1%20%3D%20times%5Btimes.length%20-%201%5D%2C%20k%20%3D%20(t1.top%20-%20t0.top)%20%2F%20(t1.m%20-%20t0.m)%3B%0Aif%20(!(k%20%3E%200))%20return%20null%3B%0Afunction%20yToMin(y)%20%7B%20return%20Math.round((t0.m%20%2B%20(y%20-%20t0.top)%20%2F%20k)%20%2F%2015)%20*%2015%3B%20%7D%0Avar%20ROOMLINE%20%3D%20%2F%5Cs-%5Cs*T%5BA-Z0-9%5D%2B%24%2F%3B%0Avar%20ev%20%3D%20%5B%5D%3B%0Acells.forEach(function%20(td)%20%7B%0Aif%20(!ROOMLINE.test(T(td)))%20return%3B%0Avar%20lines%20%3D%20(td.innerText%20%7C%7C%20'').split('%5Cn').map(function%20(s)%20%7B%20return%20s.replace(%2F%5Cs%2B%2Fg%2C%20'%20').trim()%3B%20%7D).filter(Boolean)%3B%0Avar%20first%20%3D%20lines.findIndex(function%20(l)%20%7B%20return%20ROOMLINE.test(l)%3B%20%7D)%3B%0Aif%20(first%20%3C%201)%20return%3B%0Avar%20course%20%3D%20lines.slice(0%2C%20first).join('%20')%3B%0Avar%20rooms%20%3D%20lines.slice(first).filter(function%20(l)%20%7B%20return%20ROOMLINE.test(l)%3B%20%7D)%3B%0Avar%20turma%20%3D%20(rooms%5B0%5D.match(%2FT%5BA-Z0-9%5D%2B%24%2F)%20%7C%7C%20%5B''%5D)%5B0%5D%3B%0Avar%20roomNames%20%3D%20rooms.map(function%20(r)%20%7B%20return%20r.replace(%2F%5Cs*-%5Cs*T%5BA-Z0-9%5D%2B%24%2F%2C%20'')%3B%20%7D)%0A.filter(function%20(r%2C%20i%2C%20arr)%20%7B%20return%20arr.indexOf(r)%20%3D%3D%3D%20i%3B%20%7D)%3B%0Avar%20room%20%3D%20roomNames.length%20%3E%202%20%3F%20'Several%20rooms'%20%3A%20roomNames.join('%20%2F%20')%3B%0Avar%20b%20%3D%20td.getBoundingClientRect()%2C%20cx%20%3D%20(b.left%20%2B%20b.right)%20%2F%202%3B%0Avar%20h%20%3D%20hdr.reduce(function%20(a%2C%20x)%20%7B%20return%20!a%20%7C%7C%20Math.abs(x.c%20-%20cx)%20%3C%20Math.abs(a.c%20-%20cx)%20%3F%20x%20%3A%20a%3B%20%7D%2C%20null)%3B%0Avar%20s%20%3D%20yToMin(b.top)%2C%20e%20%3D%20yToMin(b.bottom)%3B%0Aif%20(e%20%3E%20s)%20ev.push(%7B%20d%3A%20h.d%2C%20mo%3A%20h.mo%2C%20s%3A%20s%2C%20e%3A%20e%2C%20course%3A%20course%2C%20room%3A%20room%2C%20turma%3A%20turma%20%7D)%3B%0A%7D)%3B%0Areturn%20%7B%20first%3A%20hdr%5B0%5D%2C%20ev%3A%20ev%20%7D%3B%0A%7D%0Afunction%20nextDate(root)%20%7B%0Avar%20a%20%3D%20Array.prototype.find.call(root.querySelectorAll('a')%2C%20function%20(x)%20%7B%0Areturn%20%2FSeguinte%2Fi.test(x.title%20%7C%7C%20'')%20%7C%7C%20%2FSeguinte%2Fi.test(x.innerHTML)%3B%0A%7D)%3B%0Aif%20(!a)%20return%20null%3B%0Avar%20raw%20%3D%20(a.getAttribute('href')%20%7C%7C%20'')%20%2B%20'%20'%20%2B%20(a.getAttribute('onclick')%20%7C%7C%20'')%3B%0Avar%20m%20%3D%20raw.match(%2F%5Cd%7B2%7D-%5Cd%7B2%7D-%5Cd%7B4%7D%2F)%3B%0Areturn%20m%20%3F%20m%5B0%5D%20%3A%20null%3B%0A%7D%0Avar%20badge%2C%20box%3B%0Atry%20%7B%0Aif%20(!nextDate(document)%20%7C%7C%20!extract(document))%0Athrow%20new%20Error('Open%20your%20Weekly%20Schedule%20in%20netPA%20first%20(logged%20in)%2C%20then%20click%20the%20bookmark%20again.')%3B%0Abadge%20%3D%20document.createElement('div')%3B%0Abadge.style.cssText%20%3D%20'position%3Afixed%3Btop%3A12px%3Bright%3A12px%3Bz-index%3A99999%3Bbackground%3A%23141a3c%3Bcolor%3A%23fff%3Bpadding%3A10px%2014px%3Bborder-radius%3A10px%3Bfont%3A14px%20sans-serif%3Bbox-shadow%3A0%208px%2020px%20rgba(0%2C0%2C0%2C.3)'%3B%0Abadge.textContent%20%3D%20'Reading%20your%20weeks%E2%80%A6'%3B%0Adocument.body.appendChild(badge)%3B%0Abox%20%3D%20document.createElement('div')%3B%0Abox.setAttribute('aria-hidden'%2C%20'true')%3B%0Abox.style.cssText%20%3D%20'position%3Aabsolute%3Bleft%3A-30000px%3Btop%3A0%3Bpointer-events%3Anone%3Bwidth%3A'%20%2B%20document.documentElement.clientWidth%20%2B%20'px'%3B%0Adocument.body.appendChild(box)%3B%0Avar%20base%20%3D%20new%20URL(location.href)%3B%0Abase.searchParams.delete('_PR_')%3B%0Aasync%20function%20loadWeek(dt)%20%7B%0Avar%20u%20%3D%20new%20URL(base.href)%3B%0Au.searchParams.set('dtInicial'%2C%20dt)%3B%0Avar%20res%20%3D%20await%20fetch(u.href%2C%20%7B%20credentials%3A%20'include'%20%7D)%3B%0Aif%20(!res.ok)%20throw%20new%20Error('netPA%20did%20not%20answer%20('%20%2B%20res.status%20%2B%20').%20Log%20in%20again%20and%20retry.')%3B%0Avar%20buf%20%3D%20await%20res.arrayBuffer()%3B%0Avar%20cs%20%3D%20((res.headers.get('content-type')%20%7C%7C%20'').match(%2Fcharset%3D(%5B%5Cw-%5D%2B)%2Fi)%20%7C%7C%20%5B%5D)%5B1%5D%20%7C%7C%0A((new%20TextDecoder('latin1').decode(buf.slice(0%2C%204000)).match(%2Fcharset%5Cs*%3D%5Cs*%5B%22'%5D%3F(%5B%5Cw-%5D%2B)%2Fi))%20%7C%7C%20%5B%5D)%5B1%5D%20%7C%7C%20'utf-8'%3B%0Avar%20html%3B%0Atry%20%7B%20html%20%3D%20new%20TextDecoder(cs).decode(buf)%3B%20%7D%20catch%20(e)%20%7B%20html%20%3D%20new%20TextDecoder('utf-8').decode(buf)%3B%20%7D%0Avar%20doc%20%3D%20new%20DOMParser().parseFromString(html%2C%20'text%2Fhtml')%3B%0AArray.prototype.forEach.call(doc.querySelectorAll('script%2Clink%2Ciframe%2Cimg')%2C%20function%20(n)%20%7B%20n.remove()%3B%20%7D)%3B%0Abox.innerHTML%20%3D%20doc.body%20%3F%20doc.body.innerHTML%20%3A%20''%3B%0Areturn%20box%3B%0A%7D%0Avar%20all%20%3D%20%5B%5D%2C%20seen%20%3D%20%7B%7D%2C%20empty%20%3D%200%3B%0Afunction%20add(r%2C%20weekDate)%20%7B%0Avar%20wy%20%3D%20%2BweekDate.slice(6)%2C%20wm%20%3D%20%2BweekDate.slice(3%2C%205)%3B%0Ar.ev.forEach(function%20(ev)%20%7B%0Avar%20y%20%3D%20(ev.mo%20%3C%20wm)%20%3F%20wy%20%2B%201%20%3A%20wy%3B%0Avar%20key%20%3D%20y%20%2B%20'-'%20%2B%20ev.mo%20%2B%20'-'%20%2B%20ev.d%20%2B%20'%7C'%20%2B%20ev.s%20%2B%20'%7C'%20%2B%20ev.course%3B%0Aif%20(seen%5Bkey%5D)%20return%3B%0Aseen%5Bkey%5D%20%3D%201%3B%20ev.y%20%3D%20y%3B%20all.push(ev)%3B%0A%7D)%3B%0Aempty%20%3D%20r.ev.length%20%3F%200%20%3A%20empty%20%2B%201%3B%0Abadge.textContent%20%3D%20'Week%20of%20'%20%2B%20r.first.d%20%2B%20'%2F'%20%2B%20r.first.mo%20%2B%20'%3A%20'%20%2B%20r.ev.length%20%2B%20'%20classes%20('%20%2B%20all.length%20%2B%20'%20total)'%3B%0A%7D%0Avar%20now%20%3D%20new%20Date()%2C%20mon%20%3D%20new%20Date(now.getFullYear()%2C%20now.getMonth()%2C%20now.getDate()%20-%20((now.getDay()%20%2B%206)%20%25%207))%3B%0Avar%20startDate%20%3D%20pad(mon.getDate())%20%2B%20'-'%20%2B%20pad(mon.getMonth()%20%2B%201)%20%2B%20'-'%20%2B%20mon.getFullYear()%3B%0Avar%20nd%20%3D%20startDate%3B%0Afor%20(var%20w%20%3D%200%3B%20w%20%3C%20MAX_WEEKS%20%26%26%20nd%20%26%26%20empty%20%3C%20EMPTY_STOP%3B%20w%2B%2B)%20%7B%0Avar%20root%20%3D%20await%20loadWeek(nd)%3B%0Avar%20r%20%3D%20extract(root)%3B%0Aif%20(!r)%20break%3B%0Aadd(r%2C%20nd)%3B%0And%20%3D%20nextDate(root)%3B%0A%7D%0Abox.remove()%3B%20box%20%3D%20null%3B%0Atry%20%7B%20await%20fetch((function%20()%20%7B%20var%20u%20%3D%20new%20URL(base.href)%3B%20u.searchParams.set('dtInicial'%2C%20startDate)%3B%20return%20u.href%3B%20%7D)()%2C%20%7B%20credentials%3A%20'include'%20%7D)%3B%20%7D%20catch%20(e)%20%7B%7D%0Aif%20(!all.length)%20throw%20new%20Error('No%20classes%20found%20from%20this%20week%20onwards.%20Check%20your%20Weekly%20Schedule%20in%20netPA.')%3B%0Aall.sort(function%20(a%2C%20b)%20%7B%20return%20(a.y%20-%20b.y)%20%7C%7C%20(a.mo%20-%20b.mo)%20%7C%7C%20(a.d%20-%20b.d)%20%7C%7C%20(a.s%20-%20b.s)%3B%20%7D)%3B%0Afunction%20esc(s)%20%7B%20return%20s.replace(%2F%5C%5C%2Fg%2C%20'%5C%5C%5C%5C').replace(%2F%3B%2Fg%2C%20'%5C%5C%3B').replace(%2F%2C%2Fg%2C%20'%5C%5C%2C')%3B%20%7D%0Afunction%20hm(m)%20%7B%20return%20pad(Math.floor(m%20%2F%2060))%20%2B%20pad(m%20%25%2060)%20%2B%20'00'%3B%20%7D%0Avar%20stamp%20%3D%20new%20Date().toISOString().replace(%2F%5B-%3A%5D%2Fg%2C%20'').slice(0%2C%2015)%20%2B%20'Z'%3B%0Avar%20L%20%3D%20%5B'BEGIN%3AVCALENDAR'%2C%20'VERSION%3A2.0'%2C%20'PRODID%3A-%2F%2Fnetpa-ical%2F%2FEN'%2C%20'CALSCALE%3AGREGORIAN'%2C%0A'METHOD%3APUBLISH'%2C%20'X-WR-CALNAME%3ANova%20SBE'%2C%20'X-WR-TIMEZONE%3AEurope%2FLisbon'%2C%0A'BEGIN%3AVTIMEZONE'%2C%20'TZID%3AEurope%2FLisbon'%2C%0A'BEGIN%3ASTANDARD'%2C%20'DTSTART%3A19701025T020000'%2C%20'TZOFFSETFROM%3A%2B0100'%2C%20'TZOFFSETTO%3A%2B0000'%2C%20'TZNAME%3AWET'%2C%0A'RRULE%3AFREQ%3DYEARLY%3BBYMONTH%3D10%3BBYDAY%3D-1SU'%2C%20'END%3ASTANDARD'%2C%0A'BEGIN%3ADAYLIGHT'%2C%20'DTSTART%3A19700329T010000'%2C%20'TZOFFSETFROM%3A%2B0000'%2C%20'TZOFFSETTO%3A%2B0100'%2C%20'TZNAME%3AWEST'%2C%0A'RRULE%3AFREQ%3DYEARLY%3BBYMONTH%3D3%3BBYDAY%3D-1SU'%2C%20'END%3ADAYLIGHT'%2C%20'END%3AVTIMEZONE'%5D%3B%0Aall.forEach(function%20(ev)%20%7B%0Avar%20dd%20%3D%20ev.y%20%2B%20pad(ev.mo)%20%2B%20pad(ev.d)%3B%0Avar%20uid%20%3D%20(dd%20%2B%20hm(ev.s)%20%2B%20ev.course).replace(%2F%5B%5EA-Za-z0-9%5D%2Fg%2C%20'')%3B%0AL.push('BEGIN%3AVEVENT'%2C%20'UID%3A'%20%2B%20uid%20%2B%20'%40netpa-ical'%2C%20'DTSTAMP%3A'%20%2B%20stamp%2C%0A'DTSTART%3BTZID%3DEurope%2FLisbon%3A'%20%2B%20dd%20%2B%20'T'%20%2B%20hm(ev.s)%2C%0A'DTEND%3BTZID%3DEurope%2FLisbon%3A'%20%2B%20dd%20%2B%20'T'%20%2B%20hm(ev.e)%2C%0A'SUMMARY%3A'%20%2B%20esc(ev.course)%2C%0A'LOCATION%3A'%20%2B%20esc(ev.room%20%2B%20'%20-%20Nova%20SBE%2C%20Carcavelos')%2C%0A'DESCRIPTION%3A'%20%2B%20esc('Class%20'%20%2B%20ev.turma)%2C%0A'BEGIN%3AVALARM'%2C%20'ACTION%3ADISPLAY'%2C%20'DESCRIPTION%3A'%20%2B%20esc(ev.course)%2C%20'TRIGGER%3A-PT15M'%2C%20'END%3AVALARM'%2C%0A'END%3AVEVENT')%3B%0A%7D)%3B%0AL.push('END%3AVCALENDAR')%3B%0Avar%20ics%20%3D%20L.join('%5Cr%5Cn')%20%2B%20'%5Cr%5Cn'%3B%0Awindow.__netpaResult%20%3D%20%7B%20count%3A%20all.length%2C%20ics%3A%20ics%2C%20events%3A%20all%20%7D%3B%0Abadge.remove()%3B%0Aif%20(!UI)%20return%3B%0Avar%20a%20%3D%20document.createElement('a')%3B%0Aa.href%20%3D%20URL.createObjectURL(new%20Blob(%5Bics%5D%2C%20%7B%20type%3A%20'text%2Fcalendar'%20%7D))%3B%0Aa.download%20%3D%20'nova_sbe_horario.ics'%3B%0Adocument.body.appendChild(a)%3B%20a.click()%3B%20a.remove()%3B%0Avar%20courses%20%3D%20%7B%7D%3B%0Aall.forEach(function%20(e)%20%7B%20courses%5Be.course%5D%20%3D%201%3B%20%7D)%3B%0Avar%20last%20%3D%20all%5Ball.length%20-%201%5D%3B%0Aalert('Done!%20'%20%2B%20all.length%20%2B%20'%20classes%20until%20'%20%2B%20last.d%20%2B%20'%2F'%20%2B%20last.mo%20%2B%20'%2F'%20%2B%20last.y%20%2B%20'.%5Cn%5Cn'%20%2B%0AObject.keys(courses).join('%5Cn')%20%2B%20'%5Cn%5CnNow%20open%20the%20downloaded%20file%20to%20add%20it%20to%20your%20calendar.')%3B%0A%7D%20catch%20(err)%20%7B%0Aif%20(box)%20box.remove()%3B%0Aif%20(badge)%20badge.remove()%3B%0Awindow.__netpaResult%20%3D%20%7B%20error%3A%20err.message%20%7D%3B%0Aif%20(UI)%20alert('netPA%20to%20Calendar%3A%20'%20%2B%20err.message)%3B%20else%20throw%20err%3B%0A%7D%0A%7D)()%3B" onclick="event.preventDefault()" title="Drag me to your bookmarks bar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+          netPA → Calendar
+        </a>
+        <p class="hint" lang="en">Clicking it here does nothing. It only works from your bookmarks bar, inside netPA.</p>
+        <p class="hint" lang="pt">Clicar aqui não faz nada. Só funciona a partir da barra de favoritos, dentro do netPA.</p>
+        <div class="alt">
+          <p class="hint" lang="en">Can't drag it? Copy the code, create any bookmark, then paste the code into its URL field.</p>
+          <p class="hint" lang="pt">Não dá para arrastar? Copia o código, cria um favorito qualquer e cola o código no campo do URL.</p>
+          <button class="ghostbtn" id="copyBtn" type="button"><span lang="en">Copy bookmark code</span><span lang="pt">Copiar código</span></button>
+          <textarea id="bmCode" readonly aria-label="Bookmark code">javascript:(async%20function%20()%20%7B%0Avar%20UI%20%3D%20!window.__netpaNoUI%3B%0Avar%20MAX_WEEKS%20%3D%2030%2C%20EMPTY_STOP%20%3D%204%3B%0Afunction%20T(e)%20%7B%20return%20(e.innerText%20%7C%7C%20e.textContent%20%7C%7C%20'').replace(%2F%5Cs%2B%2Fg%2C%20'%20').trim()%3B%20%7D%0Afunction%20pad(n)%20%7B%20return%20String(n).padStart(2%2C%20'0')%3B%20%7D%0Afunction%20extract(root)%20%7B%0Avar%20cells%20%3D%20Array.prototype.filter.call(root.querySelectorAll('th%2Ctd')%2C%20function%20(e)%20%7B%0Areturn%20!e.querySelector('td%2Cth')%3B%0A%7D)%3B%0Avar%20hdr%20%3D%20cells.filter(function%20(e)%20%7B%0Areturn%20%2F%5E(Mon%7CTue%7CWed%7CThu%7CFri%7CSat%7CSun%7CDom%7CSeg%7CTer%7CQua%7CQui%7CSex%7CS%5B%C3%A1a%5Db)%5Cs*%5Cd%7B1%2C2%7D-%5Cd%7B1%2C2%7D%24%2Fi.test(T(e))%3B%0A%7D).map(function%20(e)%20%7B%0Avar%20b%20%3D%20e.getBoundingClientRect()%2C%20m%20%3D%20T(e).match(%2F(%5Cd%7B1%2C2%7D)-(%5Cd%7B1%2C2%7D)%24%2F)%3B%0Areturn%20%7B%20d%3A%20%2Bm%5B1%5D%2C%20mo%3A%20%2Bm%5B2%5D%2C%20c%3A%20(b.left%20%2B%20b.right)%20%2F%202%20%7D%3B%0A%7D)%3B%0Avar%20times%20%3D%20cells.filter(function%20(e)%20%7B%20return%20%2F%5E%5Cd%7B1%2C2%7Dh%5Cd%7B2%7D%24%2F.test(T(e))%3B%20%7D).map(function%20(e)%20%7B%0Avar%20m%20%3D%20T(e).match(%2F(%5Cd%2B)h(%5Cd%2B)%2F)%3B%0Areturn%20%7B%20m%3A%20%2Bm%5B1%5D%20*%2060%20%2B%20%2Bm%5B2%5D%2C%20top%3A%20e.getBoundingClientRect().top%20%7D%3B%0A%7D).sort(function%20(a%2C%20b)%20%7B%20return%20a.m%20-%20b.m%3B%20%7D)%3B%0Aif%20(hdr.length%20%3C%205%20%7C%7C%20times.length%20%3C%204)%20return%20null%3B%0Avar%20t0%20%3D%20times%5B0%5D%2C%20t1%20%3D%20times%5Btimes.length%20-%201%5D%2C%20k%20%3D%20(t1.top%20-%20t0.top)%20%2F%20(t1.m%20-%20t0.m)%3B%0Aif%20(!(k%20%3E%200))%20return%20null%3B%0Afunction%20yToMin(y)%20%7B%20return%20Math.round((t0.m%20%2B%20(y%20-%20t0.top)%20%2F%20k)%20%2F%2015)%20*%2015%3B%20%7D%0Avar%20ROOMLINE%20%3D%20%2F%5Cs-%5Cs*T%5BA-Z0-9%5D%2B%24%2F%3B%0Avar%20ev%20%3D%20%5B%5D%3B%0Acells.forEach(function%20(td)%20%7B%0Aif%20(!ROOMLINE.test(T(td)))%20return%3B%0Avar%20lines%20%3D%20(td.innerText%20%7C%7C%20'').split('%5Cn').map(function%20(s)%20%7B%20return%20s.replace(%2F%5Cs%2B%2Fg%2C%20'%20').trim()%3B%20%7D).filter(Boolean)%3B%0Avar%20first%20%3D%20lines.findIndex(function%20(l)%20%7B%20return%20ROOMLINE.test(l)%3B%20%7D)%3B%0Aif%20(first%20%3C%201)%20return%3B%0Avar%20course%20%3D%20lines.slice(0%2C%20first).join('%20')%3B%0Avar%20rooms%20%3D%20lines.slice(first).filter(function%20(l)%20%7B%20return%20ROOMLINE.test(l)%3B%20%7D)%3B%0Avar%20turma%20%3D%20(rooms%5B0%5D.match(%2FT%5BA-Z0-9%5D%2B%24%2F)%20%7C%7C%20%5B''%5D)%5B0%5D%3B%0Avar%20roomNames%20%3D%20rooms.map(function%20(r)%20%7B%20return%20r.replace(%2F%5Cs*-%5Cs*T%5BA-Z0-9%5D%2B%24%2F%2C%20'')%3B%20%7D)%0A.filter(function%20(r%2C%20i%2C%20arr)%20%7B%20return%20arr.indexOf(r)%20%3D%3D%3D%20i%3B%20%7D)%3B%0Avar%20room%20%3D%20roomNames.length%20%3E%202%20%3F%20'Several%20rooms'%20%3A%20roomNames.join('%20%2F%20')%3B%0Avar%20b%20%3D%20td.getBoundingClientRect()%2C%20cx%20%3D%20(b.left%20%2B%20b.right)%20%2F%202%3B%0Avar%20h%20%3D%20hdr.reduce(function%20(a%2C%20x)%20%7B%20return%20!a%20%7C%7C%20Math.abs(x.c%20-%20cx)%20%3C%20Math.abs(a.c%20-%20cx)%20%3F%20x%20%3A%20a%3B%20%7D%2C%20null)%3B%0Avar%20s%20%3D%20yToMin(b.top)%2C%20e%20%3D%20yToMin(b.bottom)%3B%0Aif%20(e%20%3E%20s)%20ev.push(%7B%20d%3A%20h.d%2C%20mo%3A%20h.mo%2C%20s%3A%20s%2C%20e%3A%20e%2C%20course%3A%20course%2C%20room%3A%20room%2C%20turma%3A%20turma%20%7D)%3B%0A%7D)%3B%0Areturn%20%7B%20first%3A%20hdr%5B0%5D%2C%20ev%3A%20ev%20%7D%3B%0A%7D%0Afunction%20nextDate(root)%20%7B%0Avar%20a%20%3D%20Array.prototype.find.call(root.querySelectorAll('a')%2C%20function%20(x)%20%7B%0Areturn%20%2FSeguinte%2Fi.test(x.title%20%7C%7C%20'')%20%7C%7C%20%2FSeguinte%2Fi.test(x.innerHTML)%3B%0A%7D)%3B%0Aif%20(!a)%20return%20null%3B%0Avar%20raw%20%3D%20(a.getAttribute('href')%20%7C%7C%20'')%20%2B%20'%20'%20%2B%20(a.getAttribute('onclick')%20%7C%7C%20'')%3B%0Avar%20m%20%3D%20raw.match(%2F%5Cd%7B2%7D-%5Cd%7B2%7D-%5Cd%7B4%7D%2F)%3B%0Areturn%20m%20%3F%20m%5B0%5D%20%3A%20null%3B%0A%7D%0Avar%20badge%2C%20box%3B%0Atry%20%7B%0Aif%20(!nextDate(document)%20%7C%7C%20!extract(document))%0Athrow%20new%20Error('Open%20your%20Weekly%20Schedule%20in%20netPA%20first%20(logged%20in)%2C%20then%20click%20the%20bookmark%20again.')%3B%0Abadge%20%3D%20document.createElement('div')%3B%0Abadge.style.cssText%20%3D%20'position%3Afixed%3Btop%3A12px%3Bright%3A12px%3Bz-index%3A99999%3Bbackground%3A%23141a3c%3Bcolor%3A%23fff%3Bpadding%3A10px%2014px%3Bborder-radius%3A10px%3Bfont%3A14px%20sans-serif%3Bbox-shadow%3A0%208px%2020px%20rgba(0%2C0%2C0%2C.3)'%3B%0Abadge.textContent%20%3D%20'Reading%20your%20weeks%E2%80%A6'%3B%0Adocument.body.appendChild(badge)%3B%0Abox%20%3D%20document.createElement('div')%3B%0Abox.setAttribute('aria-hidden'%2C%20'true')%3B%0Abox.style.cssText%20%3D%20'position%3Aabsolute%3Bleft%3A-30000px%3Btop%3A0%3Bpointer-events%3Anone%3Bwidth%3A'%20%2B%20document.documentElement.clientWidth%20%2B%20'px'%3B%0Adocument.body.appendChild(box)%3B%0Avar%20base%20%3D%20new%20URL(location.href)%3B%0Abase.searchParams.delete('_PR_')%3B%0Aasync%20function%20loadWeek(dt)%20%7B%0Avar%20u%20%3D%20new%20URL(base.href)%3B%0Au.searchParams.set('dtInicial'%2C%20dt)%3B%0Avar%20res%20%3D%20await%20fetch(u.href%2C%20%7B%20credentials%3A%20'include'%20%7D)%3B%0Aif%20(!res.ok)%20throw%20new%20Error('netPA%20did%20not%20answer%20('%20%2B%20res.status%20%2B%20').%20Log%20in%20again%20and%20retry.')%3B%0Avar%20buf%20%3D%20await%20res.arrayBuffer()%3B%0Avar%20cs%20%3D%20((res.headers.get('content-type')%20%7C%7C%20'').match(%2Fcharset%3D(%5B%5Cw-%5D%2B)%2Fi)%20%7C%7C%20%5B%5D)%5B1%5D%20%7C%7C%0A((new%20TextDecoder('latin1').decode(buf.slice(0%2C%204000)).match(%2Fcharset%5Cs*%3D%5Cs*%5B%22'%5D%3F(%5B%5Cw-%5D%2B)%2Fi))%20%7C%7C%20%5B%5D)%5B1%5D%20%7C%7C%20'utf-8'%3B%0Avar%20html%3B%0Atry%20%7B%20html%20%3D%20new%20TextDecoder(cs).decode(buf)%3B%20%7D%20catch%20(e)%20%7B%20html%20%3D%20new%20TextDecoder('utf-8').decode(buf)%3B%20%7D%0Avar%20doc%20%3D%20new%20DOMParser().parseFromString(html%2C%20'text%2Fhtml')%3B%0AArray.prototype.forEach.call(doc.querySelectorAll('script%2Clink%2Ciframe%2Cimg')%2C%20function%20(n)%20%7B%20n.remove()%3B%20%7D)%3B%0Abox.innerHTML%20%3D%20doc.body%20%3F%20doc.body.innerHTML%20%3A%20''%3B%0Areturn%20box%3B%0A%7D%0Avar%20all%20%3D%20%5B%5D%2C%20seen%20%3D%20%7B%7D%2C%20empty%20%3D%200%3B%0Afunction%20add(r%2C%20weekDate)%20%7B%0Avar%20wy%20%3D%20%2BweekDate.slice(6)%2C%20wm%20%3D%20%2BweekDate.slice(3%2C%205)%3B%0Ar.ev.forEach(function%20(ev)%20%7B%0Avar%20y%20%3D%20(ev.mo%20%3C%20wm)%20%3F%20wy%20%2B%201%20%3A%20wy%3B%0Avar%20key%20%3D%20y%20%2B%20'-'%20%2B%20ev.mo%20%2B%20'-'%20%2B%20ev.d%20%2B%20'%7C'%20%2B%20ev.s%20%2B%20'%7C'%20%2B%20ev.course%3B%0Aif%20(seen%5Bkey%5D)%20return%3B%0Aseen%5Bkey%5D%20%3D%201%3B%20ev.y%20%3D%20y%3B%20all.push(ev)%3B%0A%7D)%3B%0Aempty%20%3D%20r.ev.length%20%3F%200%20%3A%20empty%20%2B%201%3B%0Abadge.textContent%20%3D%20'Week%20of%20'%20%2B%20r.first.d%20%2B%20'%2F'%20%2B%20r.first.mo%20%2B%20'%3A%20'%20%2B%20r.ev.length%20%2B%20'%20classes%20('%20%2B%20all.length%20%2B%20'%20total)'%3B%0A%7D%0Avar%20now%20%3D%20new%20Date()%2C%20mon%20%3D%20new%20Date(now.getFullYear()%2C%20now.getMonth()%2C%20now.getDate()%20-%20((now.getDay()%20%2B%206)%20%25%207))%3B%0Avar%20startDate%20%3D%20pad(mon.getDate())%20%2B%20'-'%20%2B%20pad(mon.getMonth()%20%2B%201)%20%2B%20'-'%20%2B%20mon.getFullYear()%3B%0Avar%20nd%20%3D%20startDate%3B%0Afor%20(var%20w%20%3D%200%3B%20w%20%3C%20MAX_WEEKS%20%26%26%20nd%20%26%26%20empty%20%3C%20EMPTY_STOP%3B%20w%2B%2B)%20%7B%0Avar%20root%20%3D%20await%20loadWeek(nd)%3B%0Avar%20r%20%3D%20extract(root)%3B%0Aif%20(!r)%20break%3B%0Aadd(r%2C%20nd)%3B%0And%20%3D%20nextDate(root)%3B%0A%7D%0Abox.remove()%3B%20box%20%3D%20null%3B%0Atry%20%7B%20await%20fetch((function%20()%20%7B%20var%20u%20%3D%20new%20URL(base.href)%3B%20u.searchParams.set('dtInicial'%2C%20startDate)%3B%20return%20u.href%3B%20%7D)()%2C%20%7B%20credentials%3A%20'include'%20%7D)%3B%20%7D%20catch%20(e)%20%7B%7D%0Aif%20(!all.length)%20throw%20new%20Error('No%20classes%20found%20from%20this%20week%20onwards.%20Check%20your%20Weekly%20Schedule%20in%20netPA.')%3B%0Aall.sort(function%20(a%2C%20b)%20%7B%20return%20(a.y%20-%20b.y)%20%7C%7C%20(a.mo%20-%20b.mo)%20%7C%7C%20(a.d%20-%20b.d)%20%7C%7C%20(a.s%20-%20b.s)%3B%20%7D)%3B%0Afunction%20esc(s)%20%7B%20return%20s.replace(%2F%5C%5C%2Fg%2C%20'%5C%5C%5C%5C').replace(%2F%3B%2Fg%2C%20'%5C%5C%3B').replace(%2F%2C%2Fg%2C%20'%5C%5C%2C')%3B%20%7D%0Afunction%20hm(m)%20%7B%20return%20pad(Math.floor(m%20%2F%2060))%20%2B%20pad(m%20%25%2060)%20%2B%20'00'%3B%20%7D%0Avar%20stamp%20%3D%20new%20Date().toISOString().replace(%2F%5B-%3A%5D%2Fg%2C%20'').slice(0%2C%2015)%20%2B%20'Z'%3B%0Avar%20L%20%3D%20%5B'BEGIN%3AVCALENDAR'%2C%20'VERSION%3A2.0'%2C%20'PRODID%3A-%2F%2Fnetpa-ical%2F%2FEN'%2C%20'CALSCALE%3AGREGORIAN'%2C%0A'METHOD%3APUBLISH'%2C%20'X-WR-CALNAME%3ANova%20SBE'%2C%20'X-WR-TIMEZONE%3AEurope%2FLisbon'%2C%0A'BEGIN%3AVTIMEZONE'%2C%20'TZID%3AEurope%2FLisbon'%2C%0A'BEGIN%3ASTANDARD'%2C%20'DTSTART%3A19701025T020000'%2C%20'TZOFFSETFROM%3A%2B0100'%2C%20'TZOFFSETTO%3A%2B0000'%2C%20'TZNAME%3AWET'%2C%0A'RRULE%3AFREQ%3DYEARLY%3BBYMONTH%3D10%3BBYDAY%3D-1SU'%2C%20'END%3ASTANDARD'%2C%0A'BEGIN%3ADAYLIGHT'%2C%20'DTSTART%3A19700329T010000'%2C%20'TZOFFSETFROM%3A%2B0000'%2C%20'TZOFFSETTO%3A%2B0100'%2C%20'TZNAME%3AWEST'%2C%0A'RRULE%3AFREQ%3DYEARLY%3BBYMONTH%3D3%3BBYDAY%3D-1SU'%2C%20'END%3ADAYLIGHT'%2C%20'END%3AVTIMEZONE'%5D%3B%0Aall.forEach(function%20(ev)%20%7B%0Avar%20dd%20%3D%20ev.y%20%2B%20pad(ev.mo)%20%2B%20pad(ev.d)%3B%0Avar%20uid%20%3D%20(dd%20%2B%20hm(ev.s)%20%2B%20ev.course).replace(%2F%5B%5EA-Za-z0-9%5D%2Fg%2C%20'')%3B%0AL.push('BEGIN%3AVEVENT'%2C%20'UID%3A'%20%2B%20uid%20%2B%20'%40netpa-ical'%2C%20'DTSTAMP%3A'%20%2B%20stamp%2C%0A'DTSTART%3BTZID%3DEurope%2FLisbon%3A'%20%2B%20dd%20%2B%20'T'%20%2B%20hm(ev.s)%2C%0A'DTEND%3BTZID%3DEurope%2FLisbon%3A'%20%2B%20dd%20%2B%20'T'%20%2B%20hm(ev.e)%2C%0A'SUMMARY%3A'%20%2B%20esc(ev.course)%2C%0A'LOCATION%3A'%20%2B%20esc(ev.room%20%2B%20'%20-%20Nova%20SBE%2C%20Carcavelos')%2C%0A'DESCRIPTION%3A'%20%2B%20esc('Class%20'%20%2B%20ev.turma)%2C%0A'BEGIN%3AVALARM'%2C%20'ACTION%3ADISPLAY'%2C%20'DESCRIPTION%3A'%20%2B%20esc(ev.course)%2C%20'TRIGGER%3A-PT15M'%2C%20'END%3AVALARM'%2C%0A'END%3AVEVENT')%3B%0A%7D)%3B%0AL.push('END%3AVCALENDAR')%3B%0Avar%20ics%20%3D%20L.join('%5Cr%5Cn')%20%2B%20'%5Cr%5Cn'%3B%0Awindow.__netpaResult%20%3D%20%7B%20count%3A%20all.length%2C%20ics%3A%20ics%2C%20events%3A%20all%20%7D%3B%0Abadge.remove()%3B%0Aif%20(!UI)%20return%3B%0Avar%20a%20%3D%20document.createElement('a')%3B%0Aa.href%20%3D%20URL.createObjectURL(new%20Blob(%5Bics%5D%2C%20%7B%20type%3A%20'text%2Fcalendar'%20%7D))%3B%0Aa.download%20%3D%20'nova_sbe_horario.ics'%3B%0Adocument.body.appendChild(a)%3B%20a.click()%3B%20a.remove()%3B%0Avar%20courses%20%3D%20%7B%7D%3B%0Aall.forEach(function%20(e)%20%7B%20courses%5Be.course%5D%20%3D%201%3B%20%7D)%3B%0Avar%20last%20%3D%20all%5Ball.length%20-%201%5D%3B%0Aalert('Done!%20'%20%2B%20all.length%20%2B%20'%20classes%20until%20'%20%2B%20last.d%20%2B%20'%2F'%20%2B%20last.mo%20%2B%20'%2F'%20%2B%20last.y%20%2B%20'.%5Cn%5Cn'%20%2B%0AObject.keys(courses).join('%5Cn')%20%2B%20'%5Cn%5CnNow%20open%20the%20downloaded%20file%20to%20add%20it%20to%20your%20calendar.')%3B%0A%7D%20catch%20(err)%20%7B%0Aif%20(box)%20box.remove()%3B%0Aif%20(badge)%20badge.remove()%3B%0Awindow.__netpaResult%20%3D%20%7B%20error%3A%20err.message%20%7D%3B%0Aif%20(UI)%20alert('netPA%20to%20Calendar%3A%20'%20%2B%20err.message)%3B%20else%20throw%20err%3B%0A%7D%0A%7D)()%3B</textarea>
+        </div>
+      </div>
+      <div class="scr" aria-hidden="true">
+        <div class="chrome"><span class="d"><i></i><i></i><i></i></span><span class="u">any page</span></div>
+        <div class="favs"><span>Moodle</span><span>Gmail</span><span class="on">netPA → Calendar</span></div>
+        <div class="sbody">
+          <div class="arrow"><svg viewBox="0 0 64 34" fill="none"><path d="M4 30 C 22 30, 36 24, 54 7" stroke="currentColor" stroke-width="2.2" stroke-dasharray="4 5" stroke-linecap="round"/><path d="M46 5 L55 6 L54 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span lang="en">drag it up here</span><span lang="pt">arrasta até aqui</span></div>
+          <span class="tag" lang="en">It lands in your bar</span><span class="tag" lang="pt">Fica na tua barra</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="step">
+      <span class="n">2</span>
+      <div class="txt">
+        <h3 lang="en">Open your Weekly Schedule</h3><h3 lang="pt">Abre o teu Weekly Schedule</h3>
+        <ol lang="en"><li>Log in at <strong>netpa.novasbe.pt</strong>.</li><li>Go to your schedule and pick <strong>Weekly Schedule</strong> in the right-hand menu.</li></ol>
+        <ol lang="pt"><li>Faz login em <strong>netpa.novasbe.pt</strong>.</li><li>Vai ao horário e escolhe <strong>Weekly Schedule</strong> no menu da direita.</li></ol>
+        <p class="hint" lang="en">Use Weekly, not Reference Schedule. Weekly has the real dates, so it catches Saturday sessions, swapped days and the last week of term.</p>
+        <p class="hint" lang="pt">Usa o Weekly, não o Reference Schedule. O Weekly tem as datas reais, por isso apanha aulas ao sábado, dias trocados e a última semana.</p>
+      </div>
+      <div class="scr" aria-hidden="true">
+        <div class="chrome"><span class="d"><i></i><i></i><i></i></span><span class="u">netpa.novasbe.pt</span></div>
+        <div class="sbody">
+          <div class="np">
+            <div><span class="t">Weekly Schedule</span>
+              <div class="mini"><i class="a"></i><i class="b"></i><i></i><i class="c"></i><i class="c"></i><i class="a"></i><i class="b"></i><i class="a"></i><i></i><i></i><i></i><i class="b"></i><i></i><i></i><i></i></div></div>
+            <div class="menu"><span class="t">Menu Contexto</span><span class="m">› Reference Schedule</span><span class="m on">› Weekly Schedule</span></div>
+          </div>
+          <span class="tag" lang="en">This page</span><span class="tag" lang="pt">Esta página</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="step">
+      <span class="n">3</span>
+      <div class="txt">
+        <h3 lang="en">Click the bookmark</h3><h3 lang="pt">Clica no favorito</h3>
+        <ol lang="en"><li>On the Weekly Schedule page, click <strong>netPA → Calendar</strong>.</li><li>A small box counts through your weeks. Leave the tab open for about 30 seconds.</li><li>You get <strong>nova_sbe_horario.ics</strong> and a list of the courses it found.</li></ol>
+        <ol lang="pt"><li>Na página do Weekly Schedule, clica em <strong>netPA → Calendar</strong>.</li><li>Uma caixa pequena vai contando as semanas. Deixa o separador aberto uns 30 segundos.</li><li>Recebes o <strong>nova_sbe_horario.ics</strong> e a lista das cadeiras que encontrou.</li></ol>
+        <p class="hint" lang="en">It always starts from the current week and stops when your term's classes run out.</p>
+        <p class="hint" lang="pt">Começa sempre na semana atual e para quando acabam as aulas do trimestre.</p>
+      </div>
+      <div class="scr" aria-hidden="true">
+        <div class="chrome"><span class="d"><i></i><i></i><i></i></span><span class="u">netpa.novasbe.pt</span></div>
+        <div class="favs"><span>Moodle</span><span>Gmail</span><span class="on">netPA → Calendar</span></div>
+        <div class="sbody" style="min-height:180px">
+          <div class="toast">Week of 9/11: 8 classes (30 total)</div>
+          <div class="file"><span class="ic">ICS</span><div><b>nova_sbe_horario.ics</b><span lang="en">Download complete</span><span lang="pt">Transferência concluída</span></div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="step">
+      <span class="n">4</span>
+      <div class="txt">
+        <h3 lang="en">Import it into your calendar</h3><h3 lang="pt">Importa no teu calendário</h3>
+        <div class="apps" role="tablist" aria-label="Calendar app">
+          <button type="button" role="tab" id="t-g" aria-controls="p-g" aria-selected="true">Google</button>
+          <button type="button" role="tab" id="t-a" aria-controls="p-a" aria-selected="false">Apple</button>
+          <button type="button" role="tab" id="t-o" aria-controls="p-o" aria-selected="false">Outlook</button>
+        </div>
+        <div class="panel" role="tabpanel" id="p-g" aria-labelledby="t-g">
+          <ol lang="en"><li>Open <strong>calendar.google.com</strong> on your laptop (the phone app can't import).</li><li>Settings → <strong>Add calendar</strong> → <strong>Create new calendar</strong>, name it "Nova SBE".</li><li>Settings → <strong>Import &amp; export</strong> → pick the file → add it to <strong>Nova SBE</strong> → Import.</li></ol>
+          <ol lang="pt"><li>Abre <strong>calendar.google.com</strong> no portátil (a app do telemóvel não importa).</li><li>Definições → <strong>Adicionar calendário</strong> → <strong>Criar novo calendário</strong>, chama-lhe "Nova SBE".</li><li>Definições → <strong>Importar e exportar</strong> → escolhe o ficheiro → adiciona a <strong>Nova SBE</strong> → Importar.</li></ol>
+        </div>
+        <div class="panel" role="tabpanel" id="p-a" aria-labelledby="t-a" hidden>
+          <ol lang="en"><li><strong>Mac:</strong> double-click the file and choose a new calendar called "Nova SBE".</li><li><strong>iPhone:</strong> open the file (AirDrop or email it to yourself) and tap <strong>Add All</strong>.</li></ol>
+          <ol lang="pt"><li><strong>Mac:</strong> duplo clique no ficheiro e escolhe um calendário novo "Nova SBE".</li><li><strong>iPhone:</strong> abre o ficheiro (por AirDrop ou email) e toca em <strong>Adicionar tudo</strong>.</li></ol>
+        </div>
+        <div class="panel" role="tabpanel" id="p-o" aria-labelledby="t-o" hidden>
+          <ol lang="en"><li>In Outlook on the web: Calendar → <strong>Add calendar</strong>.</li><li><strong>Upload from file</strong> → pick the .ics → choose a "Nova SBE" calendar.</li></ol>
+          <ol lang="pt"><li>No Outlook web: Calendário → <strong>Adicionar calendário</strong>.</li><li><strong>Carregar a partir de ficheiro</strong> → escolhe o .ics → calendário "Nova SBE".</li></ol>
+        </div>
+        <p class="hint" lang="en">Keep it in its own calendar. If your timetable changes, delete that calendar, repeat step 3 and import again, with no duplicates.</p>
+        <p class="hint" lang="pt">Mantém tudo num calendário separado. Se o horário mudar, apagas esse calendário, repetes o passo 3 e importas outra vez, sem duplicados.</p>
+      </div>
+      <div class="scr" aria-hidden="true">
+        <div class="chrome"><span class="d"><i></i><i></i><i></i></span><span class="u">Calendar · Nova SBE</span></div>
+        <div class="sbody">
+          <div class="tinycal">
+            <span class="h">Mon</span><span class="h">Tue</span><span class="h">Wed</span><span class="h">Thu</span><span class="h">Fri</span>
+            <span class="x" style="background:var(--sun)">08:00 Small Business Mgmt</span><span class="x" style="background:var(--pink)">08:00 Product Mgmt</span><span class="x" style="background:#b9c4ff">09:30 Strategy</span><span class="x" style="background:var(--lime)">08:00 Financial Mgmt</span><span class="x" style="background:var(--mint)">08:00 Statistics</span>
+          </div>
+          <span class="tag" lang="en">Room + reminder on every class</span><span class="tag" lang="pt">Sala + alerta em cada aula</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <h2 lang="en">If something goes wrong</h2><h2 lang="pt">Se algo correr mal</h2>
+  <div class="faq">
+    <details><summary><span lang="en">"Open your Weekly Schedule first"</span><span lang="pt">"Open your Weekly Schedule first"</span></summary>
+      <p lang="en">You're on another netPA page or your session expired. Log in again, open Weekly Schedule, click the bookmark.</p>
+      <p lang="pt">Estás noutra página do netPA ou a sessão expirou. Faz login, abre o Weekly Schedule e clica no favorito.</p></details>
+    <details><summary><span lang="en">Nothing happens when I click it</span><span lang="pt">Não acontece nada ao clicar</span></summary>
+      <p lang="en">The bookmark wasn't saved properly. Delete it and redo step 1. If you pasted the code, its URL must start with javascript:</p>
+      <p lang="pt">O favorito ficou mal guardado. Apaga-o e repete o passo 1. Se colaste o código, o URL tem de começar por javascript:</p></details>
+    <details><summary><span lang="en">A class is missing</span><span lang="pt">Falta uma aula</span></summary>
+      <p lang="en">The file has everything in your Weekly Schedule from this week onwards. Past weeks aren't included. If a future class is missing, check that week in netPA.</p>
+      <p lang="pt">O ficheiro tem tudo o que está no Weekly Schedule a partir desta semana. Semanas passadas não entram. Se faltar uma aula futura, confirma essa semana no netPA.</p></details>
+    <details><summary><span lang="en">Can I do it on my phone?</span><span lang="pt">Dá no telemóvel?</span></summary>
+      <p lang="en">Steps 1–3 need a laptop. Once imported, the calendar shows up on your phone automatically.</p>
+      <p lang="pt">Os passos 1–3 precisam de portátil. Depois de importado, o calendário aparece no telemóvel sozinho.</p></details>
+  </div>
+  <div class="privacy">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+    <div>
+      <h3 lang="en">Your data stays on your laptop</h3><h3 lang="pt">Os teus dados ficam no teu portátil</h3>
+      <p lang="en">The bookmark only reads the netPA page you have open and builds the file in your own browser. It sends nothing anywhere and never sees your password.</p>
+      <p lang="pt">O favorito só lê a página do netPA que tens aberta e cria o ficheiro no teu browser. Não envia nada e nunca vê a tua password.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="credit">
+  <p><span lang="en">Made by <strong>Afonso Lobo Palmeira</strong>, IMM student. Not an official Nova SBE tool.</span><span lang="pt">Feito por <strong>Afonso Lobo Palmeira</strong>, aluno do IMM. Não é uma ferramenta oficial da Nova SBE.</span></p>
+  <p class="contact"><span lang="en">Questions or something not working?</span><span lang="pt">Dúvidas ou algo não funciona?</span>
+    <span class="mail">57080@novasbe.pt</span>
+    <button class="ghostbtn small" id="copyMail" type="button"><span lang="en">Copy email</span><span lang="pt">Copiar email</span></button></p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var app=document.getElementById('app'), en=document.getElementById('l-en'), pt=document.getElementById('l-pt');
+  function setL(l){app.setAttribute('data-l',l);document.documentElement.lang=l;en.setAttribute('aria-pressed',l==='en');pt.setAttribute('aria-pressed',l==='pt');try{localStorage.setItem('lang',l)}catch(e){}}
+  en.addEventListener('click',function(){setL('en')});pt.addEventListener('click',function(){setL('pt')});
+  try{var s=localStorage.getItem('lang');if(s==='pt'||s==='en')setL(s)}catch(e){}
+  var btn=document.getElementById('copyBtn'), ta=document.getElementById('bmCode');
+  btn.addEventListener('click',function(){
+    function fb(){ta.focus();ta.select();}
+    try{navigator.clipboard.writeText(ta.value).then(function(){var o=btn.innerHTML;btn.textContent='✓';setTimeout(function(){btn.innerHTML=o},1800)},fb)}catch(e){fb()}
+  });
+  var mb=document.getElementById('copyMail');
+  mb.addEventListener('click',function(){
+    var o=mb.innerHTML;
+    function done(){mb.textContent='✓';setTimeout(function(){mb.innerHTML=o},1800)}
+    function fb(){var r=document.createRange();r.selectNodeContents(document.querySelector('.mail'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+    try{navigator.clipboard.writeText('57080@novasbe.pt').then(done,fb)}catch(e){fb()}
+  });
+  var tabs=[].slice.call(document.querySelectorAll('.apps [role=tab]'));
+  tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);document.getElementById(x.getAttribute('aria-controls')).hidden=!on})})});
+})();
+</script>
+
+</body>
+</html>
